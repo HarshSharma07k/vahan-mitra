@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { LangSync } from "@/components/shell/LangSync";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${archivo.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable}`}
     >
       <body>
+        <LangSync />
         <TooltipProvider>{children}</TooltipProvider>
         <Toaster position="top-center" richColors />
       </body>
