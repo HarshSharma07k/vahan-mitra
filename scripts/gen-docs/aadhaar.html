@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="./common.css" />
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+  import { buildCard } from "./common.js";
+
+  const params = new URLSearchParams(location.search);
+  const name = params.get("name") || "ANANYA VERMA";
+  const seed = Number(params.get("seed") || 1619);
+
+  buildCard({
+    seed,
+    canvas: { w: 1600, h: 1000 },
+    card: { w: 1320, h: 830, radius: [4, 4, 8, 4] },
+    geometry: { rotateX: 1.1, rotateY: -1.4, rotate: 0.9 },
+    substrate: { tone: "#F5F1E5" },
+    laminated: true,
+    header: {
+      top: 26, left: 280, width: 700,
+      authority: "GOVERNMENT OF INDIA",
+      title: "AADHAAR",
+      legal: "UNIQUE IDENTIFICATION AUTHORITY OF INDIA",
+    },
+    guilloche: { top: 630, left: 40, size: 110 },
+    photo: { top: 130, left: 40, w: 170, h: 200 },
+    qr: { top: 120, left: 1110, size: 170 },
+    microtextLabel: "GOVERNMENT OF INDIA",
+    microtextTop: { top: 100, left: 60, width: 1220 },
+    microtextBottom: { top: 764, left: 60, width: 1220 },
+    watermark: { text: "GOVERNMENT OF INDIA", top: 380, left: 220, size: 90 },
+    seal: { top: 630, left: 1130, size: 140, rim: "UNIQUE IDENTIFICATION AUTHORITY OF INDIA", center: "AADHAAR" },
+    fold: { top: 560, left: -20, lengthFrac: 0.35, angle: 2 },
+    fields: [
+      { key: "name", label: "NAME", value: name, top: 150, left: 280, size: 17 },
+      { key: "dob", label: "DATE OF BIRTH", value: "14/02/1999", top: 230, left: 280 },
+      { key: "genderDeco", label: "GENDER", value: "FEMALE", top: 300, left: 280 },
+      { key: "uid", label: "AADHAAR NUMBER", value: "XXXX XXXX 4471", top: 400, left: 280, size: 18 },
+      { key: "address", label: "ADDRESS", value: "H.NO 214, SECTOR 14, GURUGRAM, HARYANA - 122001", top: 480, left: 280 },
+    ],
+  });
+</script>
+</body>
+</html>

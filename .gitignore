@@ -44,3 +44,8 @@ next-env.d.ts
 CLAUDE.md
 DECISIONS.md
 .claude/
+.serena/
+
+# mock document generator — dev tooling, debug output only
+scripts/gen-docs/preview/
+scripts/gen-docs/boxes-report.json

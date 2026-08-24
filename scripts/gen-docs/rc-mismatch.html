@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="./common.css" />
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+  import { buildCard } from "./common.js";
+
+  buildCard({
+    seed: 1407,
+    canvas: { w: 1600, h: 1000 },
+    card: { w: 1320, h: 830, radius: [6, 4, 4, 4] },
+    geometry: { rotateX: 1.0, rotateY: -1.6, rotate: -1.2 },
+    substrate: { tone: "#FAF7EF" },
+    laminated: false,
+    header: {
+      top: 26, left: 26, width: 700,
+      authority: "TRANSPORT DEPARTMENT · GOVERNMENT OF RAJASTHAN",
+      title: "REGISTRATION CERTIFICATE",
+      legal: "FORM 23 · RULE 47, CENTRAL MOTOR VEHICLES RULES 1989",
+    },
+    guilloche: { top: 16, left: 1150, size: 150 },
+    qr: { top: 16, left: 990, size: 100 },
+    microtextLabel: "REGISTRATION CERTIFICATE",
+    microtextTop: { top: 128, left: 26, width: 1268 },
+    microtextBottom: { top: 764, left: 26, width: 1268 },
+    watermark: { text: "GOVT OF RAJASTHAN", top: 320, left: 180, size: 100 },
+    seal: { top: 596, left: 1140, size: 150, rim: "RTO JAIPUR SOUTH RJ-14 • TRANSPORT DEPT", center: "RTO" },
+    fold: { top: 560, left: -20, lengthFrac: 0.4, angle: 2 },
+    rules: [{ top: 462, left: 26, width: 1268 }],
+    fields: [
+      { key: "regNumber", label: "REGISTRATION NUMBER", value: "RJ14GC4402", top: 160, left: 26, size: 16 },
+      { key: "owner", label: "OWNER NAME", value: "RAKESH YADAV", top: 230, left: 26 },
+      { key: "class", label: "VEHICLE CLASS", value: "GOODS CARRIER (LGV)", top: 300, left: 26 },
+      { key: "fatherName", label: "S/O", value: "SURESH CHAND YADAV", top: 370, left: 26 },
+      { key: "address", label: "ADDRESS", value: "PLOT 88, TONK ROAD, JAIPUR, RAJASTHAN", top: 400, left: 26 },
+
+      { key: "makeModelDeco", label: "MAKE AND MODEL", value: "TATA ACE GOLD", top: 160, left: 700 },
+      { key: "fuel", label: "FUEL", value: "DIESEL", top: 230, left: 700 },
+      { key: "hypothecation", label: "HYPOTHECATED TO", value: "HDFC BANK LTD", top: 300, left: 700 },
+      { key: "regRto", label: "REGISTERING AUTHORITY", value: "RTO JAIPUR SOUTH, RJ-14", top: 370, left: 700 },
+      { key: "taxUpto", label: "TAX VALID UPTO", value: "26/09/2029", top: 400, left: 700 },
+
+      { key: "chassis", label: "CHASSIS NUMBER", value: "MAT445021K3A00987", top: 580, left: 26 },
+      { key: "engine", label: "ENGINE NUMBER", value: "497TCIC3A551204", top: 642, left: 26 },
+      { key: "regDate", label: "REGISTERED ON", value: "27/09/2019", top: 704, left: 26 },
+    ],
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B0F16"/>
+      <stop offset="1" stop-color="#1B2430"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="url(#sky)"/>
+  <rect x="0" y="446.4" width="1280" height="273.6" fill="#20242A"/>
+  <line x1="0" y1="452.4" x2="1280" y2="452.4" stroke="#3A3F46" stroke-width="2"/>
+  <rect x="-40" y="561.6" width="90" height="6" fill="#F5F5F4" opacity="0.5"/><rect x="180" y="561.6" width="90" height="6" fill="#F5F5F4" opacity="0.5"/><rect x="400" y="561.6" width="90" height="6" fill="#F5F5F4" opacity="0.5"/><rect x="620" y="561.6" width="90" height="6" fill="#F5F5F4" opacity="0.5"/><rect x="840" y="561.6" width="90" height="6" fill="#F5F5F4" opacity="0.5"/><rect x="1060" y="561.6" width="90" height="6" fill="#F5F5F4" opacity="0.5"/>
+  
+      <g fill="#111111" opacity="0.92">
+        <ellipse cx="550" cy="450" rx="34" ry="34"/>
+        <ellipse cx="730" cy="450" rx="34" ry="34"/>
+        <path d="M 550 450 L 620 400 L 670 400 L 730 450" stroke="#111111" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <rect x="610" y="380" width="80" height="18" rx="6"/>
+      </g>
+  
+    <rect x="570" y="482" width="140" height="34" rx="3" fill="#FFFFFF" stroke="#0C0A09" stroke-width="2"/>
+    <text x="640" y="505.12" font-family="Archivo, sans-serif" font-weight="800" font-size="18.700000000000003" fill="#0C0A09" text-anchor="middle" letter-spacing="2">HR 26 DK 8337</text>
+  <rect x="18" y="18" width="330" height="34" rx="4" fill="#000000" opacity="0.55"/>
+  <text x="30" y="41" font-family="'JetBrains Mono', monospace" font-size="16" fill="#F5F5F4" letter-spacing="0.04em">02-04-2026 18:07:53</text>
+  <rect x="980" y="18" width="282" height="34" rx="4" fill="#000000" opacity="0.55"/>
+  <text x="992" y="41" font-family="'JetBrains Mono', monospace" font-size="14" fill="#F5F5F4" letter-spacing="0.03em">CAM HR-GGN-S29-C04</text>
+  <rect x="18" y="668" width="544" height="34" rx="4" fill="#000000" opacity="0.55"/>
+  <text x="30" y="691" font-family="Inter, sans-serif" font-size="14" fill="#F5F5F4">No helmet — Sector 29 roundabout, Gurugram</text>
+</svg>

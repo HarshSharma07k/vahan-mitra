@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="./common.css" />
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+  import { buildCard } from "./common.js";
+
+  buildCard({
+    seed: 1733,
+    canvas: { w: 1240, h: 1600 },
+    card: { w: 1000, h: 1400, radius: [4, 4, 5, 4] },
+    geometry: { rotateX: 0.9, rotateY: -1.8, rotate: -0.8 },
+    substrate: { tone: "#FAF7EF" },
+    laminated: false,
+    header: {
+      top: 40, left: 40, width: 800,
+      authority: "BAJAJ ALLIANZ GENERAL INSURANCE CO. LTD.",
+      title: "CERTIFICATE-CUM-POLICY SCHEDULE",
+      legal: "MOTOR INSURANCE · SECTION 146, MOTOR VEHICLES ACT 1988",
+    },
+    guilloche: { top: 30, left: 830, size: 110 },
+    qr: { top: 170, left: 830, size: 110 },
+    microtextLabel: "MOTOR INSURANCE POLICY",
+    microtextTop: { top: 170, left: 40, width: 780 },
+    microtextBottom: { top: 1360, left: 40, width: 920 },
+    watermark: { text: "BAJAJ ALLIANZ", top: 560, left: 90, size: 120 },
+    seal: { top: 1130, left: 760, size: 160, rim: "BAJAJ ALLIANZ GENERAL INSURANCE", center: "BAGIC" },
+    stamp: {
+      top: 990, left: 500, w: 260, angle: -28, size: 11.5,
+      lines: ["BAJAJ ALLIANZ GENERAL", "GURUGRAM BRANCH OFFICE", "AUTHORISED SIGNATORY"],
+    },
+    fold: { top: 1060, left: -20, lengthFrac: 0.3, angle: 1 },
+    rules: [{ top: 900, left: 40, width: 920 }],
+    notes: [
+      {
+        top: 930, left: 40, width: 920, size: 9,
+        text: "This certificate is issued in accordance with Section 146 of the Motor Vehicles Act, 1988. Subject to the terms, conditions and exceptions of the policy referred to above. Not valid unless countersigned by an authorised signatory.",
+      },
+    ],
+    fields: [
+      { key: "policyNo", label: "POLICY NUMBER", value: "OG-26-1102-1847-00021873", top: 210, left: 40, size: 15 },
+      { key: "regNumber", label: "VEHICLE REGISTRATION NUMBER", value: "HR26DK8337", top: 268, left: 40 },
+      { key: "insurer", label: "INSURER", value: "BAJAJ ALLIANZ GENERAL", top: 326, left: 40 },
+      { key: "proposer", label: "NAME OF INSURED", value: "VIKRAM SINGH RATHORE", top: 384, left: 40 },
+      { key: "makeModelDeco", label: "MAKE AND MODEL", value: "ROYAL ENFIELD CLASSIC 350", top: 442, left: 40 },
+      { key: "engineChassisDeco", label: "ENGINE / CHASSIS NO.", value: "U3S5C1MK18822 / ME3U3S5C1MK004471", top: 500, left: 40, size: 12.5 },
+      { key: "policyTypeDeco", label: "TYPE OF COVER", value: "COMPREHENSIVE", top: 558, left: 40 },
+      { key: "idvDeco", label: "INSURED DECLARED VALUE (IDV)", value: "RS. 68,400", top: 616, left: 40 },
+      { key: "premiumDeco", label: "TOTAL PREMIUM", value: "RS. 2,140", top: 674, left: 40 },
+      { key: "coveragePeriodDeco", label: "PERIOD OF INSURANCE", value: "13/08/2025 TO 12/08/2026", top: 732, left: 40 },
+      { key: "validTill", label: "VALID TILL", value: "12/08/2026", top: 790, left: 40, size: 16 },
+      { key: "ncbDeco", label: "NO CLAIM BONUS", value: "20%", top: 790, left: 300 },
+    ],
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+/* scripts/gen-docs/common.css
+   Shared substrate for every generated document photograph. Dev tooling —
+   not shipped to the app. See build.mjs for the post-render sharp pass. */
+
+@font-face {
+  font-family: "GD Archivo";
+  font-weight: 700;
+  src: url("./fonts/Archivo-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Archivo";
+  font-weight: 800;
+  src: url("./fonts/Archivo-800.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Inter";
+  font-weight: 400;
+  src: url("./fonts/Inter-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Inter";
+  font-weight: 500;
+  src: url("./fonts/Inter-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Inter";
+  font-weight: 600;
+  src: url("./fonts/Inter-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Mono";
+  font-weight: 500;
+  src: url("./fonts/JetBrainsMono-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Mono";
+  font-weight: 600;
+  src: url("./fonts/JetBrainsMono-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Condensed";
+  font-weight: 400;
+  src: url("./fonts/RobotoCondensed-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Condensed";
+  font-weight: 600;
+  src: url("./fonts/RobotoCondensed-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "GD Condensed";
+  font-weight: 700;
+  src: url("./fonts/RobotoCondensed-700.woff2") format("woff2");
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #1a1816;
+}
+
+#stage {
+  position: relative;
+  overflow: hidden;
+  background: #2a2724;
+}
+
+#rig {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.card {
+  position: absolute;
+  overflow: hidden;
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 0.45),
+    0 30px 60px -20px rgb(0 0 0 / 0.6);
+}
+
+.substrate {
+  position: absolute;
+  inset: 0;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.dust-fibre {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.form-layer, .data-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.data-layer {
+  will-change: transform;
+}
+
+.label {
+  position: absolute;
+  font-family: "GD Condensed", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #3a4a6b;
+  white-space: nowrap;
+}
+
+.value {
+  position: absolute;
+  font-family: "GD Mono", monospace;
+  font-weight: 500;
+  color: #16181c;
+  white-space: nowrap;
+}
+
+.value:nth-child(even) { transform: translateY(0.5px); }
+
+.hair-rule {
+  position: absolute;
+  background: rgba(58, 74, 107, 0.35);
+}
+
+.lighting-overlay {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.specular-sheen {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hologram-band {
+  position: absolute;
+  mix-blend-mode: screen;
+  opacity: 0.09;
+  pointer-events: none;
+}
+
+.fold-light {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.fold-dark {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.28);
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.guilloche { position: absolute; pointer-events: none; }
+.microtext {
+  position: absolute;
+  font-family: "GD Condensed", sans-serif;
+  font-size: 3px;
+  letter-spacing: 0.06em;
+  color: #3a4a6b;
+  opacity: 0.55;
+  filter: blur(0.3px);
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ghost-watermark {
+  position: absolute;
+  font-family: "GD Archivo", sans-serif;
+  font-weight: 800;
+  color: #3a4a6b;
+  opacity: 0.05;
+  white-space: nowrap;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.seal {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.8;
+}
+.qr-block {
+  position: absolute;
+  pointer-events: none;
+}
+
+.specimen-diag {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0.05;
+}
+.specimen-footer {
+  position: absolute;
+  font-family: "GD Condensed", sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  color: #3a4a6b;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.header-block {
+  position: absolute;
+}
+.header-authority {
+  font-family: "GD Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #3a4a6b;
+}
+.header-title {
+  font-family: "GD Archivo", sans-serif;
+  font-weight: 800;
+  color: #16181c;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.header-legal {
+  font-family: "GD Condensed", sans-serif;
+  font-weight: 400;
+  color: #57534e;
+  letter-spacing: 0.03em;
+}
+
+.photo-box {
+  position: absolute;
+  background: linear-gradient(160deg, #d8d2c4, #c3bcac);
+  border: 1px solid rgba(58, 74, 107, 0.4);
+}
+.photo-box svg { width: 100%; height: 100%; }
+
+.stamp {
+  position: absolute;
+  color: #4b3b73;
+  opacity: 0.42;
+  font-family: "GD Condensed", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="./common.css" />
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+  import { buildCard } from "./common.js";
+
+  buildCard({
+    seed: 1201,
+    canvas: { w: 1600, h: 1000 },
+    card: { w: 1320, h: 830, radius: [4, 4, 4, 7] },
+    geometry: { rotateX: 1.4, rotateY: -2.1, rotate: 1.7 },
+    substrate: { tone: "#F8F4EA" },
+    laminated: false,
+    header: {
+      top: 26, left: 26, width: 700,
+      authority: "TRANSPORT DEPARTMENT · GOVERNMENT OF HARYANA",
+      title: "REGISTRATION CERTIFICATE",
+      legal: "FORM 23 · RULE 47, CENTRAL MOTOR VEHICLES RULES 1989",
+    },
+    guilloche: { top: 16, left: 1150, size: 150 },
+    qr: { top: 16, left: 990, size: 100 },
+    microtextLabel: "REGISTRATION CERTIFICATE",
+    microtextTop: { top: 128, left: 26, width: 1268 },
+    microtextBottom: { top: 764, left: 26, width: 1268 },
+    watermark: { text: "GOVT OF HARYANA", top: 320, left: 200, size: 110 },
+    seal: { top: 596, left: 1140, size: 150, rim: "RTO GURUGRAM HR-26 • TRANSPORT DEPT", center: "RTO" },
+    fold: { top: 300, left: -20, lengthFrac: 0.42, angle: -3 },
+    rules: [{ top: 462, left: 26, width: 1268 }],
+    fields: [
+      { key: "regNumber", label: "REGISTRATION NUMBER", value: "HR26DK8337", top: 160, left: 26, size: 16 },
+      { key: "owner", label: "OWNER NAME", value: "VIKRAM SINGH RATHORE", top: 230, left: 26 },
+      { key: "makeModel", label: "MAKE AND MODEL", value: "ROYAL ENFIELD CLASSIC 350", top: 300, left: 26 },
+      { key: "fatherName", label: "S/O", value: "MOHAN SINGH RATHORE", top: 370, left: 26 },
+      { key: "address", label: "ADDRESS", value: "H.NO 214, SECTOR 14, GURUGRAM, HARYANA", top: 400, left: 26 },
+
+      { key: "vehicleClassDeco", label: "VEHICLE CLASS", value: "MOTOR CYCLE (M-CYCLE/SCOOTER)", top: 160, left: 700 },
+      { key: "fuel", label: "FUEL", value: "PETROL", top: 230, left: 700 },
+      { key: "seating", label: "SEATING CAPACITY", value: "2", top: 300, left: 700 },
+      { key: "colour", label: "COLOUR", value: "BLACK", top: 370, left: 700 },
+      { key: "taxUpto", label: "TAX VALID UPTO", value: "17/06/2031", top: 400, left: 700 },
+
+      { key: "chassis", label: "CHASSIS NUMBER", value: "ME3U3S5C1MK004471", top: 580, left: 26 },
+      { key: "engine", label: "ENGINE NUMBER", value: "U3S5C1MK18822", top: 642, left: 26 },
+      { key: "regDate", label: "REGISTERED ON", value: "18/06/2021", top: 704, left: 26 },
+    ],
+  });
+</script>
+</body>
+</html>

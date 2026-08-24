@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="./common.css" />
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+  import { buildCard } from "./common.js";
+
+  buildCard({
+    seed: 1523,
+    canvas: { w: 1600, h: 1000 },
+    card: { w: 1320, h: 830, radius: [4, 8, 4, 4] },
+    geometry: { rotateX: -1.2, rotateY: 2.4, rotate: -1.1 },
+    substrate: { tone: "#F6F2E7" },
+    laminated: true,
+    header: {
+      top: 26, left: 40, width: 620,
+      authority: "TRANSPORT DEPARTMENT · GOVT OF HARYANA",
+      title: "DRIVING LICENCE",
+      legal: "FORM 7 · RULE 14, CENTRAL MOTOR VEHICLES RULES 1989",
+    },
+    guilloche: { top: 16, left: 1150, size: 130 },
+    photo: { top: 120, left: 1100, w: 160, h: 200 },
+    microtextLabel: "DRIVING LICENCE",
+    microtextTop: { top: 110, left: 40, width: 1240 },
+    microtextBottom: { top: 764, left: 40, width: 1240 },
+    watermark: { text: "DRIVING LICENCE", top: 300, left: 220, size: 90 },
+    seal: { top: 636, left: 40, size: 130, rim: "TRANSPORT DEPT GOVT OF HARYANA", center: "DL" },
+    qr: { top: 636, left: 1150, size: 130 },
+    fold: { top: 480, left: -20, lengthFrac: 0.4, angle: -2 },
+    rules: [{ top: 460, left: 40, width: 700 }],
+    fields: [
+      { key: "dlNumber", label: "LICENCE NUMBER", value: "HR-2620190004471", top: 150, left: 40, size: 16 },
+      { key: "name", label: "NAME", value: "ANANYA VERMA", top: 220, left: 40 },
+      { key: "dob", label: "DATE OF BIRTH", value: "14/02/1999", top: 290, left: 40 },
+      { key: "cov", label: "VEHICLE CLASSES (COV)", value: "MCWG, LMV", top: 360, left: 40 },
+      { key: "validTill", label: "VALID TILL", value: "13/02/2039", top: 430, left: 40 },
+
+      { key: "address", label: "ADDRESS", value: "H.NO 214, SECTOR 14, GURUGRAM, HARYANA", top: 500, left: 40 },
+      { key: "bloodGroup", label: "BLOOD GROUP", value: "B+", top: 570, left: 40 },
+      { key: "issueDate", label: "DATE OF ISSUE", value: "14/02/2019", top: 570, left: 300 },
+    ],
+  });
+</script>
+</body>
+</html>
