@@ -5,6 +5,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { toast } from "sonner";
 import {
   getCitizen,
   getVehiclesFor,
@@ -23,6 +24,13 @@ import {
   type Vehicle,
   type WalletDocument,
 } from "@/lib/mockData";
+import { formatINR } from "@/lib/utils";
+
+export interface DisputePayload {
+  reason: string;
+  statement: string;
+  evidenceDocId?: string;
+}
 
 const DISPUTE_RESOLUTION_MS = 8000;
 
@@ -57,7 +65,7 @@ interface AppActions {
   startApplication: (application: Application) => void;
   submitApplication: (applicationId: string) => void;
   payChallan: (challanId: string) => void;
-  disputeChallan: (challanId: string) => void;
+  disputeChallan: (challanId: string, payload: DisputePayload) => void;
   resetDemo: () => void;
 }
 
@@ -151,11 +159,23 @@ export const useAppStore = create<AppState>()(
           ),
         })),
 
-      disputeChallan: (challanId) => {
+      disputeChallan: (challanId, payload) => {
         set((state) => ({
           challans: state.challans.map((challan) =>
             challan.id === challanId
-              ? { ...challan, status: "DISPUTED" satisfies ChallanStatus }
+              ? {
+                  ...challan,
+                  status: "DISPUTED" satisfies ChallanStatus,
+                  disputeTimeline: [
+                    {
+                      id: `dsp_${challanId}_filed`,
+                      at: MOCK_TODAY,
+                      title: `You disputed this fine: ${payload.reason}`,
+                      detail: payload.statement,
+                      actor: "CITIZEN" as const,
+                    },
+                  ],
+                }
               : challan
           ),
         }));
@@ -164,14 +184,29 @@ export const useAppStore = create<AppState>()(
         if (pending) clearTimeout(pending);
 
         const timer = setTimeout(() => {
+          let waivedAmount = 0;
           set((state) => ({
-            challans: state.challans.map((challan) =>
-              challan.id === challanId
-                ? { ...challan, status: "WAIVED" satisfies ChallanStatus }
-                : challan
-            ),
+            challans: state.challans.map((challan) => {
+              if (challan.id !== challanId) return challan;
+              waivedAmount = challan.amount;
+              return {
+                ...challan,
+                status: "WAIVED" satisfies ChallanStatus,
+                disputeTimeline: [
+                  ...(challan.disputeTimeline ?? []),
+                  {
+                    id: `dsp_${challanId}_waived`,
+                    at: MOCK_TODAY,
+                    title: "Fine waived",
+                    detail: "Your dispute was accepted and this fine has been withdrawn.",
+                    actor: "SYSTEM" as const,
+                  },
+                ],
+              };
+            }),
           }));
           disputeTimers.delete(challanId);
+          toast.success(`Fine waived — ${formatINR(waivedAmount)} back in your pocket`);
         }, DISPUTE_RESOLUTION_MS);
 
         disputeTimers.set(challanId, timer);

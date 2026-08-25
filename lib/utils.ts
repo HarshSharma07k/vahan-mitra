@@ -59,6 +59,15 @@ export function getAge(dob: string): number {
   return age
 }
 
+/** Deterministic mock transaction / application ID — no Math.random, stable per seed. */
+export function formatMockId(prefix: string, seed: string): string {
+  let hash = 0
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0
+  }
+  return `${prefix}${String(hash).padStart(10, "0").slice(-10)}`
+}
+
 export type DayPeriod = "morning" | "afternoon" | "evening"
 
 /** Derived from MOCK_TODAY's fixed hour, not the wall clock. */

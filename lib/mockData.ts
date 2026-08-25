@@ -96,6 +96,8 @@ export interface Vehicle {
   /** True while the RC is still in the seller's name. Drives the "action needed" card. */
   ownershipPending: boolean;
   previousOwner?: string;
+  /** Set when the citizen bought it used. Challans dated before this are the previous owner's. */
+  boughtOn?: string;
   /** Set when the citizen has sold it. Challans dated after this are disputable. */
   soldOn?: string;
   insuranceValidTill: string;
@@ -154,6 +156,8 @@ export interface Challan {
   cameraId: string;
   /** Populated by getDisputeSignals(); seeded here for the demo personas. */
   disputeSignals: string[];
+  /** Populated once a dispute is filed — the citizen's statement plus the wait for a verdict. */
+  disputeTimeline?: TimelineEvent[];
 }
 
 export interface ServiceTask {
@@ -317,6 +321,7 @@ export const mockVehicles: Vehicle[] = [
     registeredRto: "rto_hr26",
     ownershipPending: true,
     previousOwner: "Vikram Singh Rathore",
+    boughtOn: "2026-06-09",
     insuranceValidTill: "2026-08-12", // already expired vs MOCK_TODAY — drives the DocScan beat
     pucValidTill: "2026-11-30",
   },
@@ -436,6 +441,23 @@ export const mockWallet: WalletDocument[] = [
         fixLabel: "Upload new policy",
       },
     ],
+  },
+  {
+    id: "doc_ana_saledeed",
+    citizenId: "cit_ananya",
+    kind: "SALE_DEED",
+    title: "Sale deed — DL 3C BF 1129",
+    fileName: "sale-deed-dl3cbf1129.jpg",
+    previewUrl: "/mock/sale-deed-dl3cbf1129.svg",
+    health: "VERIFIED",
+    addedOn: "2026-06-02",
+    fields: [
+      { key: "seller", label: "Seller", value: "VIKRAM SINGH RATHORE", confidence: 0.94, box: { x: 9, y: 17, w: 36, h: 2.5 } },
+      { key: "buyer", label: "Buyer", value: "ANANYA VERMA", confidence: 0.96, box: { x: 9, y: 25, w: 27, h: 2.5 } },
+      { key: "regNumber", label: "Vehicle", value: "DL3CBF1129", confidence: 0.97, box: { x: 9, y: 33, w: 25, h: 2.5 } },
+      { key: "saleDate", label: "Date of sale", value: "30/05/2026", confidence: 0.98, box: { x: 9, y: 41, w: 17, h: 2.5 } },
+    ],
+    issues: [],
   },
   {
     id: "doc_rak_dl",
@@ -596,7 +618,7 @@ export const mockChallans: Challan[] = [
     location: "Yamuna Expressway, Jewar toll",
     state: "Uttar Pradesh",
     status: "PENDING",
-    evidenceUrl: "/mock/evidence-permit-01.jpg",
+    evidenceUrl: "/mock/evidence-permit-01.svg",
     cameraId: "UP-GBN-YEW-T03",
     disputeSignals: [],
   },
@@ -614,7 +636,7 @@ export const mockChallans: Challan[] = [
     location: "Tonk Road, Jaipur",
     state: "Rajasthan",
     status: "PAID",
-    evidenceUrl: "/mock/evidence-puc-01.jpg",
+    evidenceUrl: "/mock/evidence-puc-01.svg",
     cameraId: "RJ-JAI-TNK-C09",
     disputeSignals: [],
   },
@@ -943,6 +965,36 @@ export const mockOcrFixtures: OcrFixture[] = [
         message:
           "The bottom third of this scan is out of focus, so the chassis number could not be read reliably. Retake it in better light with the whole card flat in frame.",
         fixLabel: "Retake photo",
+      },
+    ],
+  },
+  {
+    kind: "AADHAAR",
+    variant: "clean",
+    previewUrl: "/mock/aadhaar-clean.png",
+    fields: [
+      { key: "name", label: "Name", value: "ANANYA VERMA", confidence: 0.98, box: { x: 26.8, y: 23.9, w: 7, h: 2.2 } },
+      { key: "dob", label: "Date of birth", value: "14/02/1999", confidence: 0.97, box: { x: 26.7, y: 31.9, w: 4.8, h: 1.8 } },
+      { key: "uid", label: "Aadhaar number", value: "XXXX XXXX 4471", confidence: 0.99, box: { x: 26.4, y: 48.8, w: 8.6, h: 2.5 } },
+    ],
+    issues: [],
+  },
+  {
+    kind: "RC",
+    variant: "mismatch",
+    previewUrl: "/mock/rc-mismatch.png",
+    fields: [
+      { key: "regNumber", label: "Registration number", value: "RJ14GC4402", confidence: 0.97, box: { x: 10.7, y: 26.6, w: 5.4, h: 2 } },
+      { key: "owner", label: "Owner name", value: "RAKESH YADAV", confidence: 0.88, box: { x: 10.7, y: 33.6, w: 5.7, h: 1.8 } },
+      { key: "class", label: "Vehicle class", value: "GOODS CARRIER (LGV)", confidence: 0.91, box: { x: 10.7, y: 40.4, w: 9, h: 1.9 } },
+    ],
+    issues: [
+      {
+        code: "NAME_MISMATCH",
+        severity: "BLOCKING",
+        message:
+          "This RC reads RAKESH YADAV. Your Aadhaar says RAKESH KUMAR YADAV. RTOs reject on this. Tell us which one is correct and we will file the correction with it.",
+        fixLabel: "Resolve name",
       },
     ],
   },

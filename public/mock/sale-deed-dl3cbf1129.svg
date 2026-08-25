@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1400" viewBox="0 0 1000 1400">
+  <rect x="0" y="0" width="1000" height="1400" fill="#F7F5F0"/>
+  <rect x="24" y="24" width="952" height="1352" fill="none" stroke="#0C0A09" stroke-width="2"/>
+  <text x="500" y="110" font-family="Georgia, serif" font-size="30" fill="#0C0A09" text-anchor="middle" letter-spacing="1">VEHICLE SALE DEED CUM AFFIDAVIT</text>
+  <line x1="90" y1="150" x2="910" y2="150" stroke="#0C0A09" stroke-width="1.5"/>
+
+  <text x="90" y="230" font-family="Georgia, serif" font-size="20" fill="#57534E">Seller</text>
+  <text x="90" y="266" font-family="Georgia, serif" font-size="24" fill="#0C0A09" font-weight="bold">VIKRAM SINGH RATHORE</text>
+
+  <text x="90" y="340" font-family="Georgia, serif" font-size="20" fill="#57534E">Buyer</text>
+  <text x="90" y="376" font-family="Georgia, serif" font-size="24" fill="#0C0A09" font-weight="bold">ANANYA VERMA</text>
+
+  <text x="90" y="450" font-family="Georgia, serif" font-size="20" fill="#57534E">Vehicle registration number</text>
+  <text x="90" y="486" font-family="'JetBrains Mono', monospace" font-size="24" fill="#0C0A09" font-weight="bold">DL 3C BF 1129</text>
+
+  <text x="90" y="560" font-family="Georgia, serif" font-size="20" fill="#57534E">Date of sale</text>
+  <text x="90" y="596" font-family="'JetBrains Mono', monospace" font-size="24" fill="#0C0A09" font-weight="bold">30/05/2026</text>
+
+  <text x="90" y="700" font-family="Georgia, serif" font-size="17" fill="#0C0A09" width="820">
+    <tspan x="90" dy="0">I, the seller named above, hereby declare that I have sold the above vehicle</tspan>
+    <tspan x="90" dy="30">to the buyer named above on the date stated, and have received full</tspan>
+    <tspan x="90" dy="30">and final payment. All liabilities arising after this date rest with the buyer.</tspan>
+  </text>
+
+  <circle cx="800" cy="1120" r="70" fill="none" stroke="#0F766E" stroke-width="3" opacity="0.55"/>
+  <text x="800" y="1112" font-family="Georgia, serif" font-size="13" fill="#0F766E" text-anchor="middle" opacity="0.7">NOTARY</text>
+  <text x="800" y="1132" font-family="Georgia, serif" font-size="13" fill="#0F766E" text-anchor="middle" opacity="0.7">VERIFIED</text>
+
+  <line x1="90" y1="1220" x2="330" y2="1220" stroke="#0C0A09" stroke-width="1"/>
+  <text x="90" y="1250" font-family="Georgia, serif" font-size="15" fill="#57534E">Seller's signature</text>
+  <line x1="500" y1="1220" x2="740" y2="1220" stroke="#0C0A09" stroke-width="1"/>
+  <text x="500" y="1250" font-family="Georgia, serif" font-size="15" fill="#57534E">Buyer's signature</text>
+</svg>
