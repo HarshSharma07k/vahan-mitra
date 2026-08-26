@@ -46,12 +46,12 @@ export function VehicleGarageCard({ vehicle, openFineCount, lang }: VehicleGarag
         <div className="flex flex-1 flex-col gap-0.5">
           <span className="text-muted">{t("dashboard.insuranceLabel", lang)}</span>
           <span className={cn("font-medium", TONE_CLASSES[insuranceTone])}>
-            {relativeDays(vehicle.insuranceValidTill)}
+            {relativeDays(vehicle.insuranceValidTill, lang)}
           </span>
         </div>
         <div className="flex flex-1 flex-col gap-0.5">
           <span className="text-muted">{t("dashboard.pucLabel", lang)}</span>
-          <span className={cn("font-medium", TONE_CLASSES[pucTone])}>{relativeDays(vehicle.pucValidTill)}</span>
+          <span className={cn("font-medium", TONE_CLASSES[pucTone])}>{relativeDays(vehicle.pucValidTill, lang)}</span>
         </div>
       </div>
 

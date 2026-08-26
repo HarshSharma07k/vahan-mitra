@@ -203,11 +203,12 @@ const strings = {
   "apply.feeLabel": { en: "Fee", hi: "शुल्क" },
   "apply.etaLabel": { en: "Usually takes", hi: "आम तौर पर लगता है" },
   "apply.etaDays": { en: "{{n}} days", hi: "{{n}} दिन" },
+  "apply.etaDaySingular": { en: "1 day", hi: "1 दिन" },
   "apply.legalNameNote": { en: "Legally this is", hi: "कानूनी नाम है" },
 
   // Pending docs card
   "pending.heading": { en: "Still needed", hi: "अभी और चाहिए" },
-  "pending.dueBy": { en: "Due by {{date}}", hi: "{{date}} तक ज़रूरी" },
+  "pending.dueBy": { en: "Due {{date}}", hi: "{{date}} ज़रूरी" },
   "pending.upload": { en: "Upload", hi: "अपलोड करें" },
   "pending.complete": { en: "{{done}} of {{total}} documents in", hi: "{{total}} में से {{done}} दस्तावेज़ आ गए" },
 
@@ -408,6 +409,10 @@ export function t(
     (acc, [k, v]) => acc.replaceAll(`{{${k}}}`, String(v)),
     raw as string
   );
+}
+
+export function etaDaysLabel(n: number, lang: Lang): string {
+  return n === 1 ? t("apply.etaDaySingular", lang) : t("apply.etaDays", lang, { n });
 }
 
 export function docLabel(kind: string, lang: Lang): string {

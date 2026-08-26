@@ -107,18 +107,18 @@ export default function ApplyTaskPage() {
 
     let applicationId = existingDraft?.id;
 
+    const hasGaps = missingNonBlocking.length > 0;
+    const stages: ApplicationStage[] = [
+      { key: "docs", label: "Documents", labelHi: "दस्तावेज़", state: "DONE", completedOn: MOCK_TODAY.slice(0, 10), office: "Online" },
+      { key: "fee", label: "Fee payment", labelHi: "शुल्क भुगतान", state: "DONE", completedOn: MOCK_TODAY.slice(0, 10), office: "Online" },
+      { key: "verify", label: "RTO verification", labelHi: "आरटीओ जाँच", state: hasGaps ? "BLOCKED" : "ACTIVE" },
+      { key: "approve", label: "Approval", labelHi: "मंज़ूरी", state: "PENDING" },
+      { key: "dispatch", label: "Dispatched", labelHi: "भेजा गया", state: "PENDING" },
+    ];
+
     if (!existingDraft) {
       const isVehicleService = VEHICLE_SERVICES.includes(task.serviceId);
       const vehicle = isVehicleService ? vehicles.find((v) => v.citizenId === citizenId) : undefined;
-      const hasGaps = missingNonBlocking.length > 0;
-
-      const stages: ApplicationStage[] = [
-        { key: "docs", label: "Documents", labelHi: "दस्तावेज़", state: "DONE", completedOn: MOCK_TODAY.slice(0, 10), office: "Online" },
-        { key: "fee", label: "Fee payment", labelHi: "शुल्क भुगतान", state: "DONE", completedOn: MOCK_TODAY.slice(0, 10), office: "Online" },
-        { key: "verify", label: "RTO verification", labelHi: "आरटीओ जाँच", state: hasGaps ? "BLOCKED" : "ACTIVE" },
-        { key: "approve", label: "Approval", labelHi: "मंज़ूरी", state: "PENDING" },
-        { key: "dispatch", label: "Dispatched", labelHi: "भेजा गया", state: "PENDING" },
-      ];
 
       const newApplication: Application = {
         id: formatMockId("app_", `${citizenId}_${task.id}_${MOCK_TODAY}`),
@@ -147,7 +147,11 @@ export default function ApplyTaskPage() {
       consequence: `After ${consequenceDate} this application closes and the ${formatINR(task.feeInr)} fee has to be paid again.`,
     }));
 
-    submitApplication(applicationId as string, pendingDocs.length > 0 ? pendingDocs : undefined);
+    submitApplication(
+      applicationId as string,
+      pendingDocs.length > 0 ? pendingDocs : undefined,
+      existingDraft ? { stages, feePaidInr: task.feeInr } : undefined
+    );
     toast.success(t("apply.submitToast", lang));
     setConfettiTrigger((n) => n + 1);
     await wait(CELEBRATION_MS);

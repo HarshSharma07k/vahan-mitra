@@ -46,7 +46,7 @@ export default function HomePage() {
     inProgressApplications.length,
     docsNeedingAttention.length
   );
-  const triggers = computeTriggers(citizenId as string);
+  const triggers = computeTriggers(citizenId as string, lang);
 
   return (
     <div className="flex flex-col gap-8">

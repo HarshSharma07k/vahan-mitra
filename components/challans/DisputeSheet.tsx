@@ -30,7 +30,7 @@ import {
   type DisputeReason,
 } from "@/lib/challanEngine";
 import { t } from "@/lib/i18n";
-import type { Challan, Lang, Vehicle } from "@/lib/mockData";
+import { getCitizen, type Challan, type Lang, type Vehicle } from "@/lib/mockData";
 
 const REASON_LABEL_KEY: Record<
   DisputeReason,
@@ -84,9 +84,10 @@ function DisputeSheetForm({ challan, vehicle, lang, onDone }: DisputeSheetFormPr
   const citizenId = useAppStore((state) => state.session.citizenId);
   const wallet = useAppStore((state) => state.wallet);
   const disputeChallan = useAppStore((state) => state.disputeChallan);
+  const citizenName = (citizenId ? getCitizen(citizenId)?.fullName : undefined) ?? "";
   const [reason, setReason] = useState<DisputeReason>(() => inferDisputeReason(challan.disputeSignals));
   const [statement, setStatement] = useState(() =>
-    buildDisputeStatement(inferDisputeReason(challan.disputeSignals), challan, vehicle, citizenId ?? "")
+    buildDisputeStatement(inferDisputeReason(challan.disputeSignals), challan, vehicle, citizenName)
   );
   const [submitting, setSubmitting] = useState(false);
 
@@ -95,7 +96,7 @@ function DisputeSheetForm({ challan, vehicle, lang, onDone }: DisputeSheetFormPr
   function handleReasonChange(value: string) {
     const nextReason = value as DisputeReason;
     setReason(nextReason);
-    setStatement(buildDisputeStatement(nextReason, challan, vehicle, citizenId ?? ""));
+    setStatement(buildDisputeStatement(nextReason, challan, vehicle, citizenName));
   }
 
   async function handleSubmit() {

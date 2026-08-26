@@ -72,7 +72,11 @@ interface AppActions {
   resolveIntent: (plan: TaskPlan) => void;
   startApplication: (application: Application) => void;
   /** Filing with every blocking doc but gaps left over marks the application SUBMITTED_PARTIAL and records what's still owed. */
-  submitApplication: (applicationId: string, pendingDocs?: PendingVerification[]) => void;
+  submitApplication: (
+    applicationId: string,
+    pendingDocs?: PendingVerification[],
+    stageUpdate?: { stages: Application["stages"]; feePaidInr: number }
+  ) => void;
   resolvePendingVerification: (applicationId: string, pendingVerificationId: string, doc: WalletDocument) => void;
   toggleReminderMute: (reminderId: string) => void;
   raiseDelayQuery: (applicationId: string) => void;
@@ -146,12 +150,13 @@ export const useAppStore = create<AppState>()(
           ],
         })),
 
-      submitApplication: (applicationId, pendingDocs) =>
+      submitApplication: (applicationId, pendingDocs, stageUpdate) =>
         set((state) => ({
           applications: state.applications.map((application) =>
             application.id === applicationId
               ? {
                   ...application,
+                  ...stageUpdate,
                   status: (pendingDocs && pendingDocs.length > 0
                     ? "SUBMITTED_PARTIAL"
                     : "SUBMITTED") satisfies ApplicationStatus,

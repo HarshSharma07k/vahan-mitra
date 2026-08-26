@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { MOCK_TODAY } from "@/lib/mockData"
+import { MOCK_TODAY, type Lang } from "@/lib/mockData"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -35,8 +35,13 @@ export function daysUntil(iso: string): number {
 }
 
 /** Diffs the YYYY-MM-DD portion only, against MOCK_TODAY — never real time. */
-export function relativeDays(iso: string): string {
+export function relativeDays(iso: string, lang: Lang = "en"): string {
   const diff = daysUntil(iso)
+  if (lang === "hi") {
+    if (diff === 0) return "आज"
+    if (diff > 0) return `${diff} दिन में`
+    return `${-diff} दिन पहले`
+  }
   if (diff === 0) return "today"
   if (diff > 0) return `in ${diff} day${diff === 1 ? "" : "s"}`
   return `${-diff} day${diff === -1 ? "" : "s"} ago`

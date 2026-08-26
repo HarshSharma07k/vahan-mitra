@@ -8,7 +8,7 @@ import { EmptyState } from "@/components/common/EmptyState";
 import { ComplexityMeter } from "@/components/common/ComplexityMeter";
 import { useAppStore } from "@/store/useAppStore";
 import { useCountUp } from "@/hooks/useCountUp";
-import { t } from "@/lib/i18n";
+import { etaDaysLabel, t } from "@/lib/i18n";
 import { formatINR } from "@/lib/utils";
 import { getBenchmark, type ServiceTask } from "@/lib/mockData";
 
@@ -98,7 +98,7 @@ export default function PlanPage() {
               <div className="flex items-center justify-between gap-3 border-t border-line pt-3">
                 <div className="flex gap-4 text-[13px] text-muted">
                   <span className="font-data text-ink">{formatINR(task.feeInr)}</span>
-                  <span>{t("apply.etaDays", lang, { n: task.estimatedDays })}</span>
+                  <span>{etaDaysLabel(task.estimatedDays, lang)}</span>
                 </div>
                 <Button asChild size="sm" className="rounded-xl bg-brand hover:bg-brand/90">
                   <Link href={`/apply/${task.id}`}>{t("plan.startCta", lang)}</Link>
@@ -116,7 +116,7 @@ export default function PlanPage() {
         </div>
         <div className="flex flex-col items-end gap-0.5">
           <span className="text-[13px] text-muted">{t("plan.totalDays", lang)}</span>
-          <span className="text-[15px] text-ink">{t("apply.etaDays", lang, { n: animatedDays })}</span>
+          <span className="text-[15px] text-ink">{etaDaysLabel(animatedDays, lang)}</span>
         </div>
       </div>
     </div>

@@ -66,7 +66,7 @@ export function ChallanCard({ challan, vehicle, lang, onDispute }: ChallanCardPr
         <div className="flex flex-col items-end gap-0.5 text-[13px]">
           <span className="text-muted">{t("challans.issuedOn", lang, { date: formatDate(challan.issuedOn) })}</span>
           {isPending && (
-            <span className="font-medium text-ink">{t("challans.dueBy", lang, { when: relativeDays(challan.dueOn) })}</span>
+            <span className="font-medium text-ink">{t("challans.dueBy", lang, { when: relativeDays(challan.dueOn, lang) })}</span>
           )}
         </div>
       </div>

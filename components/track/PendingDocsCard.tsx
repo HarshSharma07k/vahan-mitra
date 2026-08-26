@@ -73,7 +73,7 @@ export function PendingDocsCard({ application, pendingDocs, citizenId, lang }: P
               <div className="flex flex-col gap-0.5">
                 <p className="text-[15px] text-ink">{label}</p>
                 <p className="text-[13px] text-muted">
-                  {t("pending.dueBy", lang, { date: relativeDays(doc.dueBy) })}
+                  {t("pending.dueBy", lang, { date: relativeDays(doc.dueBy, lang) })}
                 </p>
               </div>
               <Button

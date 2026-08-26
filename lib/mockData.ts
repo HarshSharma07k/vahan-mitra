@@ -364,7 +364,7 @@ export const mockVehicles: Vehicle[] = [
     registeredRto: "rto_rj14",
     ownershipPending: false,
     insuranceValidTill: "2026-10-04",
-    pucValidTill: "2026-09-02",
+    pucValidTill: "2027-02-19",
   },
 ];
 
@@ -1117,7 +1117,9 @@ export interface ProactiveTrigger {
   serviceId: ServiceId;
   /** One line, plain, stating the cost of doing nothing. */
   headline: string;
+  headlineHi: string;
   costOfInaction: string;
+  costOfInactionHi: string;
   urgencyDays: number;
 }
 
@@ -1129,7 +1131,9 @@ export const mockProactiveTriggers: ProactiveTrigger[] = [
     subjectId: "doc_rak_dl",
     serviceId: "DL_RENEWAL",
     headline: "Your licence expires in 11 days",
+    headlineHi: "आपका लाइसेंस 11 दिन में समाप्त हो जाएगा",
     costOfInaction: "Renewing after expiry adds ₹1,000 and can mean taking the driving test again.",
+    costOfInactionHi: "समय बीतने के बाद नवीनीकरण में ₹1,000 अतिरिक्त लगते हैं और दोबारा ड्राइविंग टेस्ट देना पड़ सकता है।",
     urgencyDays: 11,
   },
   {
@@ -1139,7 +1143,9 @@ export const mockProactiveTriggers: ProactiveTrigger[] = [
     subjectId: "veh_rj14gc4402",
     serviceId: "PUC_RENEWAL",
     headline: "PUC on RJ 14 GC 4402 expires in 6 days",
+    headlineHi: "RJ 14 GC 4402 का पीयूसी 6 दिन में समाप्त हो जाएगा",
     costOfInaction: "Driving without a valid PUC is a ₹2,000 fine on the spot.",
+    costOfInactionHi: "वैध पीयूसी के बिना गाड़ी चलाने पर मौके पर ₹2,000 का जुर्माना लगता है।",
     urgencyDays: 6,
   },
   {
@@ -1149,7 +1155,9 @@ export const mockProactiveTriggers: ProactiveTrigger[] = [
     subjectId: "veh_rj14gc4402",
     serviceId: "HYPOTHECATION_TERMINATION",
     headline: "Your loan is closed but the bank is still on your RC",
+    headlineHi: "आपका लोन बंद हो चुका है लेकिन बैंक अभी भी आपकी आरसी पर दर्ज है",
     costOfInaction: "You cannot sell this vehicle until HDFC Bank Ltd comes off the registration.",
+    costOfInactionHi: "जब तक HDFC Bank Ltd का नाम पंजीकरण से नहीं हटता, आप यह गाड़ी बेच नहीं सकते।",
     urgencyDays: 0,
   },
   {
@@ -1159,7 +1167,9 @@ export const mockProactiveTriggers: ProactiveTrigger[] = [
     subjectId: "doc_ana_insurance",
     serviceId: "INSURANCE_UPDATE",
     headline: "Insurance on HR 26 DK 8337 expired 11 days ago",
+    headlineHi: "HR 26 DK 8337 का बीमा 11 दिन पहले समाप्त हो गया",
     costOfInaction: "Ownership transfer will be rejected, and any claim can be denied outright.",
+    costOfInactionHi: "स्वामित्व हस्तांतरण अस्वीकार हो जाएगा, और कोई भी दावा पूरी तरह ख़ारिज किया जा सकता है।",
     urgencyDays: -11,
   },
   {
@@ -1169,7 +1179,9 @@ export const mockProactiveTriggers: ProactiveTrigger[] = [
     subjectId: "veh_hr26dk8337",
     serviceId: "RC_TRANSFER",
     headline: "This bike is still registered to Vikram Singh Rathore",
+    headlineHi: "यह बाइक अभी भी विक्रम सिंह राठौर के नाम पर पंजीकृत है",
     costOfInaction: "Every fine on it goes to him, and insurance claims can be refused.",
+    costOfInactionHi: "इस पर लगने वाला हर जुर्माना उन्हीं के नाम जाता है, और बीमा दावे अस्वीकार किए जा सकते हैं।",
     urgencyDays: 0,
   },
 ];

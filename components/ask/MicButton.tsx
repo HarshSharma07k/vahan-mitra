@@ -83,7 +83,20 @@ export function MicButton({ lang, onResult, disabled }: MicButtonProps) {
       recognitionRef.current = recognition;
       transcriptRef.current = "";
 
+      // The constructor can exist (e.g. Chromium on a machine with no mic or
+      // blocked permission) yet never fire onstart/onerror at all — it just
+      // hangs. A hard timeout on "did it actually start" is the only way to
+      // guarantee the fallback typing kicks in, per the demo-must-never-fail rule.
+      let settled = false;
+      const startTimeout = window.setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        recognition.abort();
+        startFallbackTyping();
+      }, 1200);
+
       recognition.onstart = () => {
+        window.clearTimeout(startTimeout);
         setListening(true);
         setLiveText("");
       };
@@ -95,12 +108,23 @@ export function MicButton({ lang, onResult, disabled }: MicButtonProps) {
         setLiveText(transcript);
       };
       recognition.onerror = () => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(startTimeout);
         setListening(false);
         startFallbackTyping();
       };
       recognition.onend = () => {
+        window.clearTimeout(startTimeout);
         setListening(false);
-        if (transcriptRef.current.trim()) onResult(transcriptRef.current.trim());
+        if (settled) return;
+        settled = true;
+        if (transcriptRef.current.trim()) {
+          onResult(transcriptRef.current.trim());
+        } else {
+          // Recognition ran but heard nothing (no mic input) — same fallback.
+          startFallbackTyping();
+        }
       };
 
       recognition.start();

@@ -7,6 +7,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { daysUntil, relativeDays, formatINR } from "@/lib/utils";
 import {
   mockProactiveTriggers,
+  type Lang,
   type ProactiveTrigger,
   type TriggerKind,
 } from "@/lib/mockData";
@@ -31,7 +32,9 @@ function computeDynamicTriggers(citizenId: string): ProactiveTrigger[] {
           subjectId: doc.id,
           serviceId: "DL_RENEWAL",
           headline: `Your licence expires ${relativeDays(doc.expiresOn)}`,
+          headlineHi: `आपका लाइसेंस ${relativeDays(doc.expiresOn, "hi")} समाप्त हो जाएगा`,
           costOfInaction: "Renewing after expiry adds ₹1,000 and can mean taking the driving test again.",
+          costOfInactionHi: "समय बीतने के बाद नवीनीकरण में ₹1,000 अतिरिक्त लगते हैं और दोबारा ड्राइविंग टेस्ट देना पड़ सकता है।",
           urgencyDays: days,
         });
       }
@@ -46,7 +49,9 @@ function computeDynamicTriggers(citizenId: string): ProactiveTrigger[] {
           subjectId: doc.id,
           serviceId: "INSURANCE_UPDATE",
           headline: `Your insurance ${days < 0 ? "expired" : "expires"} ${relativeDays(doc.expiresOn)}`,
+          headlineHi: `आपका बीमा ${relativeDays(doc.expiresOn, "hi")} ${days < 0 ? "समाप्त हो गया" : "समाप्त होगा"}`,
           costOfInaction: "Ownership transfer will be rejected, and any claim can be denied outright.",
+          costOfInactionHi: "स्वामित्व हस्तांतरण अस्वीकार हो जाएगा, और कोई भी दावा पूरी तरह ख़ारिज किया जा सकता है।",
           urgencyDays: days,
         });
       }
@@ -63,7 +68,9 @@ function computeDynamicTriggers(citizenId: string): ProactiveTrigger[] {
         subjectId: vehicle.id,
         serviceId: "PUC_RENEWAL",
         headline: `PUC on ${vehicle.regNumber} ${pucDays < 0 ? "expired" : "expires"} ${relativeDays(vehicle.pucValidTill)}`,
+        headlineHi: `${vehicle.regNumber} का पीयूसी ${relativeDays(vehicle.pucValidTill, "hi")} ${pucDays < 0 ? "समाप्त हो गया" : "समाप्त होगा"}`,
         costOfInaction: "Driving without a valid PUC is a ₹2,000 fine on the spot.",
+        costOfInactionHi: "वैध पीयूसी के बिना गाड़ी चलाने पर मौके पर ₹2,000 का जुर्माना लगता है।",
         urgencyDays: pucDays,
       });
     }
@@ -76,7 +83,9 @@ function computeDynamicTriggers(citizenId: string): ProactiveTrigger[] {
         subjectId: vehicle.id,
         serviceId: "RC_TRANSFER",
         headline: `This vehicle is still registered to ${vehicle.previousOwner ?? "the previous owner"}`,
+        headlineHi: `यह गाड़ी अभी भी ${vehicle.previousOwner ?? "पिछले मालिक"} के नाम पर पंजीकृत है`,
         costOfInaction: "Every fine on it goes to them, and insurance claims can be refused.",
+        costOfInactionHi: "इस पर लगने वाला हर जुर्माना उन्हीं के नाम जाता है, और बीमा दावे अस्वीकार किए जा सकते हैं।",
         urgencyDays: 0,
       });
     }
@@ -89,7 +98,9 @@ function computeDynamicTriggers(citizenId: string): ProactiveTrigger[] {
         subjectId: vehicle.id,
         serviceId: "HYPOTHECATION_TERMINATION",
         headline: `Your loan is closed but ${vehicle.hypothecatedTo} is still on your RC`,
+        headlineHi: `आपका लोन बंद हो चुका है लेकिन ${vehicle.hypothecatedTo} अभी भी आपकी आरसी पर दर्ज है`,
         costOfInaction: "You cannot sell this vehicle until the bank comes off the registration.",
+        costOfInactionHi: "जब तक बैंक का नाम पंजीकरण से नहीं हटता, आप यह गाड़ी बेच नहीं सकते।",
         urgencyDays: 0,
       });
     }
@@ -106,7 +117,9 @@ function computeDynamicTriggers(citizenId: string): ProactiveTrigger[] {
         subjectId: challan.id,
         serviceId: "CHALLAN_CLEAR",
         headline: `${formatINR(challan.amount)} fine due ${relativeDays(challan.dueOn)}`,
+        headlineHi: `${formatINR(challan.amount)} का जुर्माना ${relativeDays(challan.dueOn, "hi")} देय है`,
         costOfInaction: "Ownership transfer and other paperwork on this vehicle stay blocked until it's paid or disputed.",
+        costOfInactionHi: "जब तक यह भरा या विवादित नहीं होता, इस गाड़ी पर स्वामित्व हस्तांतरण और अन्य कागज़ी काम रुके रहेंगे।",
         urgencyDays: days,
       });
     }
@@ -115,8 +128,8 @@ function computeDynamicTriggers(citizenId: string): ProactiveTrigger[] {
   return triggers;
 }
 
-/** Merges curated + computed triggers, dedupes by (kind, subjectId) — curated copy wins — drops triggers for services the citizen already has an open application for, and sorts challans first, then by urgencyDays ascending. */
-export function computeTriggers(citizenId: string): ProactiveTrigger[] {
+/** Merges curated + computed triggers, dedupes by (kind, subjectId) — curated copy wins — drops triggers for services the citizen already has an open application for, and sorts challans first, then by urgencyDays ascending. Headline/costOfInaction are returned in the requested language. */
+export function computeTriggers(citizenId: string, lang: Lang = "en"): ProactiveTrigger[] {
   const curated = mockProactiveTriggers.filter((trigger) => trigger.citizenId === citizenId);
   const dynamic = computeDynamicTriggers(citizenId);
   const { applications } = useAppStore.getState();
@@ -137,9 +150,14 @@ export function computeTriggers(citizenId: string): ProactiveTrigger[] {
   return Array.from(byKey.values())
     .filter((trigger) => !openServiceIds.has(trigger.serviceId))
     .sort((a, b) => {
-    const aChallan = a.kind === "CHALLAN_DUE_SOON" ? 0 : 1;
-    const bChallan = b.kind === "CHALLAN_DUE_SOON" ? 0 : 1;
-    if (aChallan !== bChallan) return aChallan - bChallan;
-    return a.urgencyDays - b.urgencyDays;
-  });
+      const aChallan = a.kind === "CHALLAN_DUE_SOON" ? 0 : 1;
+      const bChallan = b.kind === "CHALLAN_DUE_SOON" ? 0 : 1;
+      if (aChallan !== bChallan) return aChallan - bChallan;
+      return a.urgencyDays - b.urgencyDays;
+    })
+    .map((trigger) =>
+      lang === "hi"
+        ? { ...trigger, headline: trigger.headlineHi, costOfInaction: trigger.costOfInactionHi }
+        : trigger
+    );
 }
