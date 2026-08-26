@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { VehicleClass } from "@/lib/mockData";
 
@@ -17,9 +20,13 @@ const COMMERCIAL_CLASSES: VehicleClass[] = ["GOODS", "TRANSPORT"];
 
 export function PlateChip({ regNumber, vehicleClass, size = "md" }: PlateChipProps) {
   const isCommercial = COMMERCIAL_CLASSES.includes(vehicleClass);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <span
+    <motion.span
+      initial={reduceMotion ? false : { scale: 1.06, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 24 }}
       className={cn(
         "inline-flex items-center rounded-[4px] font-display font-extrabold uppercase tracking-[0.15em] text-ink",
         isCommercial ? "bg-plate" : "bg-white border-2 border-ink",
@@ -27,6 +34,6 @@ export function PlateChip({ regNumber, vehicleClass, size = "md" }: PlateChipPro
       )}
     >
       {regNumber}
-    </span>
+    </motion.span>
   );
 }

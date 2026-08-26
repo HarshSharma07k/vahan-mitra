@@ -2,6 +2,7 @@
 
 import { Car, CircleCheck, Sparkles } from "lucide-react";
 import { EmptyState } from "@/components/common/EmptyState";
+import { StaggerList } from "@/components/common/StaggerList";
 import { IntentBox } from "@/components/dashboard/IntentBox";
 import { ActionCard } from "@/components/dashboard/ActionCard";
 import { VehicleCard } from "@/components/dashboard/VehicleCard";
@@ -63,7 +64,10 @@ export default function HomePage() {
           {t("dashboard.actionHeading", lang)}
         </h2>
         {triggers.length > 0 ? (
-          <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
+          <StaggerList
+            className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0"
+            itemClassName="shrink-0 snap-start"
+          >
             {triggers.map((trigger) => (
               <ActionCard
                 key={trigger.id}
@@ -74,7 +78,7 @@ export default function HomePage() {
                 ctaHref={`/apply/${mockServices[trigger.serviceId].id}`}
               />
             ))}
-          </div>
+          </StaggerList>
         ) : (
           <EmptyState
             icon={CircleCheck}
@@ -91,11 +95,11 @@ export default function HomePage() {
           {t("dashboard.vehiclesHeading", lang)}
         </h2>
         {vehicles.length > 0 ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerList className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {vehicles.map((vehicle) => (
               <VehicleCard key={vehicle.id} vehicle={vehicle} lang={lang} />
             ))}
-          </div>
+          </StaggerList>
         ) : (
           <EmptyState
             icon={Car}
@@ -112,11 +116,11 @@ export default function HomePage() {
           {t("dashboard.applicationsHeading", lang)}
         </h2>
         {inProgressApplications.length > 0 ? (
-          <div className="flex flex-col gap-2">
+          <StaggerList className="flex flex-col gap-2">
             {inProgressApplications.map((application) => (
               <ApplicationRow key={application.id} application={application} lang={lang} />
             ))}
-          </div>
+          </StaggerList>
         ) : (
           <EmptyState
             icon={Sparkles}

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { ArrowLeft, FileQuestion } from "lucide-react";
 import { EmptyState } from "@/components/common/EmptyState";
+import { Confetti } from "@/components/common/Confetti";
 import { DocStep } from "@/components/apply/DocStep";
 import { ReviewStep } from "@/components/apply/ReviewStep";
 import { useAppStore } from "@/store/useAppStore";
@@ -27,6 +28,9 @@ import {
   type ServiceId,
   type WalletDocument,
 } from "@/lib/mockData";
+
+// Lets the confetti burst play before the router unmounts this page.
+const CELEBRATION_MS = 500;
 
 const VEHICLE_SERVICES: ServiceId[] = [
   "RC_TRANSFER",
@@ -61,6 +65,7 @@ export default function ApplyTaskPage() {
     return initial;
   });
   const [submitting, setSubmitting] = useState(false);
+  const [confettiTrigger, setConfettiTrigger] = useState(0);
 
   const { blocking, nonBlocking } = useMemo(
     () => (task ? splitRequiredDocs(task) : { blocking: [], nonBlocking: [] }),
@@ -144,6 +149,8 @@ export default function ApplyTaskPage() {
 
     submitApplication(applicationId as string, pendingDocs.length > 0 ? pendingDocs : undefined);
     toast.success(t("apply.submitToast", lang));
+    setConfettiTrigger((n) => n + 1);
+    await wait(CELEBRATION_MS);
     router.push(`/track/${applicationId}`);
   }
 
@@ -201,6 +208,8 @@ export default function ApplyTaskPage() {
           </div>
         </>
       )}
+
+      <Confetti trigger={confettiTrigger} />
     </div>
   );
 }

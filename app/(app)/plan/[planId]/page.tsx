@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/common/EmptyState";
 import { ComplexityMeter } from "@/components/common/ComplexityMeter";
 import { useAppStore } from "@/store/useAppStore";
+import { useCountUp } from "@/hooks/useCountUp";
 import { t } from "@/lib/i18n";
 import { formatINR } from "@/lib/utils";
 import { getBenchmark, type ServiceTask } from "@/lib/mockData";
@@ -36,6 +37,8 @@ export default function PlanPage() {
   const plans = useAppStore((state) => state.plans);
 
   const plan = plans.find((p) => p.id === params.planId);
+  const animatedFee = useCountUp(plan?.totalFeeInr ?? 0);
+  const animatedDays = useCountUp(plan?.totalDays ?? 0);
 
   if (!plan) {
     return (
@@ -109,11 +112,11 @@ export default function PlanPage() {
       <div className="flex items-center justify-between rounded-2xl border border-line bg-canvas px-4 py-3">
         <div className="flex flex-col gap-0.5">
           <span className="text-[13px] text-muted">{t("plan.totalFee", lang)}</span>
-          <span className="font-data text-[15px] text-ink">{formatINR(plan.totalFeeInr)}</span>
+          <span className="font-data text-[15px] text-ink">{formatINR(animatedFee)}</span>
         </div>
         <div className="flex flex-col items-end gap-0.5">
           <span className="text-[13px] text-muted">{t("plan.totalDays", lang)}</span>
-          <span className="text-[15px] text-ink">{t("apply.etaDays", lang, { n: plan.totalDays })}</span>
+          <span className="text-[15px] text-ink">{t("apply.etaDays", lang, { n: animatedDays })}</span>
         </div>
       </div>
     </div>

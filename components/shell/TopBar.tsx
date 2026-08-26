@@ -31,9 +31,14 @@ export function TopBar() {
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-line bg-surface/95 px-4 backdrop-blur sm:px-8">
-      <h1 className="font-display text-[19px] font-bold text-ink">
-        {activeItem ? t(activeItem.labelKey, lang) : ""}
-      </h1>
+      <div className="flex items-center gap-2.5">
+        <h1 className="font-display text-[19px] font-bold text-ink">
+          {activeItem ? t(activeItem.labelKey, lang) : ""}
+        </h1>
+        <span className="hidden rounded-full border border-line bg-canvas px-2 py-0.5 font-data text-[11px] font-medium tracking-wide text-muted sm:inline-block">
+          DEMO
+        </span>
+      </div>
 
       <div className="flex items-center gap-3">
         <div className="flex items-center rounded-full border border-line bg-canvas p-0.5">

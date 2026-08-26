@@ -75,7 +75,6 @@
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
@@ -97,10 +96,13 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* Vahan Mitra design tokens — declared last so they win over any shadcn
-     default of the same name (only --muted collides: shadcn's is a
-     background-surface token, ours is the secondary-text color CLAUDE.md
-     specifies as `--muted`). */
+  /* Vahan Mitra design tokens. Only --muted collides with a shadcn default
+     (shadcn's is a background-surface token, ours is the secondary-text
+     color CLAUDE.md specifies as `--muted`) — that default was deleted
+     above rather than shadowed here, because Tailwind v4's build emits a
+     `@supports (color: lab(...))` block that re-applies each oklch()
+     custom property's original value after :root, so a same-rule
+     override would have been silently undone for exactly this token. */
   --brand: #0f766e;
   --brand-soft: #f0fdfa;
   --plate: #ffd400;
@@ -161,6 +163,16 @@
   :lang(hi) {
     font-family: var(--font-hindi);
   }
+}
+
+/* Buttons: 150ms colour, 1.5px translate down on press, never scale. */
+[data-slot="button"] {
+  transition-property: color, background-color, border-color, transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+[data-slot="button"]:active {
+  transform: translateY(1.5px);
 }
 
 @media (prefers-reduced-motion: reduce) {

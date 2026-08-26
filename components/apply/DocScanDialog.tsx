@@ -3,7 +3,8 @@
 // Every upload — camera, file, or sample — goes through the same 1200ms
 // runOcr() sweep so the demo behaves identically with no camera in the room.
 
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Camera, Check, FileText } from "lucide-react";
 import {
   Dialog,
@@ -13,7 +14,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { runOcr, getSampleDocsFor } from "@/lib/ocrEngine";
 import { formatMockId } from "@/lib/utils";
 import { docLabel, t } from "@/lib/i18n";
@@ -48,15 +48,20 @@ export function DocScanDialog({
   const [stage, setStage] = useState<Stage>("pick");
   const [fixture, setFixture] = useState<OcrFixture | null>(null);
   const [fileName, setFileName] = useState("");
+  const [prevOpen, setPrevOpen] = useState(open);
   const samples = getSampleDocsFor(docKind);
   const title = titleOverride ?? docLabel(docKind, lang);
 
-  useEffect(() => {
-    if (!open) return;
-    setStage("pick");
-    setFixture(null);
-    setFileName("");
-  }, [open]);
+  // Render-time sync, not an effect: each time the dialog opens fresh, reset
+  // to the pick stage before anything paints.
+  if (open !== prevOpen) {
+    setPrevOpen(open);
+    if (open) {
+      setStage("pick");
+      setFixture(null);
+      setFileName("");
+    }
+  }
 
   async function scan(name: string) {
     setFileName(name);
@@ -124,7 +129,7 @@ export function DocScanDialog({
 
         {stage === "scanning" && (
           <div aria-live="polite" className="flex flex-col items-center gap-3 py-6">
-            <Skeleton className="h-40 w-full rounded-xl" />
+            <ScanLine />
             <p className="text-[13px] text-muted">{t("apply.scanning", lang)}</p>
           </div>
         )}
@@ -152,5 +157,31 @@ export function DocScanDialog({
         )}
       </DialogContent>
     </Dialog>
+  );
+}
+
+// Mirrors the 1200ms OCR read latency. Reduced motion gets a single fade
+// instead of a sweeping line, per the motion audit.
+function ScanLine() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <div className="relative h-40 w-full overflow-hidden rounded-xl border border-line bg-canvas">
+      {reduceMotion ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.24, ease: "easeOut" }}
+          className="absolute inset-0 bg-brand-soft"
+        />
+      ) : (
+        <motion.div
+          initial={{ top: "0%" }}
+          animate={{ top: "100%" }}
+          transition={{ duration: 1.2, ease: "linear", repeat: Infinity }}
+          className="absolute inset-x-0 h-0.5 bg-brand shadow-[0_0_8px_2px_var(--brand)]"
+        />
+      )}
+    </div>
   );
 }

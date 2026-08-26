@@ -2,6 +2,7 @@
 
 import { Sparkles } from "lucide-react";
 import { EmptyState } from "@/components/common/EmptyState";
+import { StaggerList } from "@/components/common/StaggerList";
 import { ApplicationRow } from "@/components/dashboard/ApplicationRow";
 import { useAppStore } from "@/store/useAppStore";
 import { t } from "@/lib/i18n";
@@ -15,11 +16,11 @@ export default function TrackPage() {
       <h1 className="font-display text-[24px] font-bold text-ink">{t("track.heading", lang)}</h1>
 
       {applications.length > 0 ? (
-        <div className="flex flex-col gap-2">
+        <StaggerList className="flex flex-col gap-2">
           {applications.map((application) => (
             <ApplicationRow key={application.id} application={application} lang={lang} />
           ))}
-        </div>
+        </StaggerList>
       ) : (
         <EmptyState
           icon={Sparkles}

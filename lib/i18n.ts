@@ -130,6 +130,10 @@ const strings = {
   "dashboard.applicationsEmptyCta": { en: "Ask Vahan Mitra", hi: "वाहन मित्र से पूछें" },
   "dashboard.expectedBy": { en: "Expected by {{date}}", hi: "{{date}} तक अपेक्षित" },
   "dashboard.actionStart": { en: "Start", hi: "शुरू करें" },
+  "dashboard.intentEmptyHint": {
+    en: "Type what you need — even a few words are enough.",
+    hi: "आपको क्या चाहिए, वह लिखें — कुछ शब्द भी काफ़ी हैं।",
+  },
 
   // Complexity meter — "Kitna Kam?"
   "complexity.heroHeading": { en: "How much less work?", hi: "कितना कम काम?" },
@@ -302,6 +306,93 @@ const strings = {
     en: "Made asking a citizen for the same information twice illegal — once the state has it, no form may ask again.",
     hi: "नागरिक से एक ही जानकारी दोबारा माँगना गैरकानूनी बना दिया — एक बार राज्य के पास जानकारी आने पर, कोई फॉर्म फिर नहीं माँग सकता।",
   },
+
+  // Challans — "Fines"
+  "challans.heading": { en: "Fines", hi: "चालान" },
+  "challans.summary": { en: "{{amount}} unpaid across {{count}} fine{{s}}", hi: "{{count}} चालान में {{amount}} बकाया" },
+  "challans.emptyHeading": { en: "No fines on record", hi: "कोई चालान दर्ज नहीं" },
+  "challans.emptyDirection": {
+    en: "Nothing owed right now. New fines, if any, will show up here.",
+    hi: "अभी कुछ बकाया नहीं है। कोई नया चालान होने पर यहाँ दिखेगा।",
+  },
+  "challans.emptyCta": { en: "Go home", hi: "होम पर जाएँ" },
+  "challans.pay": { en: "Pay {{amount}}", hi: "{{amount}} भुगतान करें" },
+  "challans.paying": { en: "Paying…", hi: "भुगतान हो रहा है…" },
+  "challans.paid": { en: "Paid", hi: "भुगतान हो गया" },
+  "challans.dispute": { en: "Dispute", hi: "विवाद दर्ज करें" },
+  "challans.signalHint": { en: "This looks disputable", hi: "यह विवादित लग सकता है" },
+  "challan.status.PENDING": { en: "Unpaid", hi: "बकाया" },
+  "challan.status.PAID": { en: "Paid", hi: "भुगतान हो गया" },
+  "challan.status.DISPUTED": { en: "Disputed", hi: "विवादित" },
+  "challan.status.WAIVED": { en: "Waived", hi: "माफ़" },
+  "challan.status.IN_LOK_ADALAT": { en: "In Lok Adalat", hi: "लोक अदालत में" },
+  "challans.dueBy": { en: "Due {{when}}", hi: "{{when}} तक देय" },
+  "challans.issuedOn": { en: "Issued {{date}}", hi: "{{date}} को जारी" },
+
+  // Dispute sheet
+  "dispute.title": { en: "Dispute this fine", hi: "इस चालान पर विवाद दर्ज करें" },
+  "dispute.reasonLabel": { en: "Why are you disputing this?", hi: "आप इसे क्यों चुनौती दे रहे हैं?" },
+  "dispute.reasonPlaceholder": { en: "Choose a reason", hi: "एक वजह चुनें" },
+  "dispute.reasonSold": { en: "Vehicle already sold", hi: "गाड़ी पहले ही बेच दी" },
+  "dispute.reasonPlateMisread": { en: "Number plate misread", hi: "नंबर प्लेट गलत पढ़ी गई" },
+  "dispute.reasonNotDriving": { en: "I wasn't driving", hi: "मैं गाड़ी नहीं चला रहा था" },
+  "dispute.reasonWrongVehicle": { en: "Wrong vehicle in the photo", hi: "फोटो में गलत गाड़ी है" },
+  "dispute.statementLabel": { en: "Your statement", hi: "आपका बयान" },
+  "dispute.statementNote": {
+    en: "Written for you — read it over and edit anything that isn't right.",
+    hi: "आपके लिए लिख दिया गया है — पढ़ें और जो सही न लगे उसे बदल दें।",
+  },
+  "dispute.evidenceLabel": { en: "Camera evidence", hi: "कैमरा सबूत" },
+  "dispute.attachedDoc": { en: "Attached: {{title}}", hi: "जोड़ा गया: {{title}}" },
+  "dispute.submitCta": { en: "File dispute", hi: "विवाद दर्ज करें" },
+  "dispute.submitting": { en: "Filing…", hi: "दर्ज हो रहा है…" },
+  "dispute.submitToast": { en: "Dispute filed", hi: "विवाद दर्ज हो गया" },
+  "dispute.pendingNote": {
+    en: "RTOs usually take 3–5 working days to review a dispute.",
+    hi: "आरटीओ को विवाद की समीक्षा में आम तौर पर 3–5 कार्यदिवस लगते हैं।",
+  },
+  "dispute.timelineHeading": { en: "What happens next", hi: "आगे क्या होगा" },
+
+  // Wallet — "Documents"
+  "wallet.heading": { en: "Documents", hi: "दस्तावेज़" },
+  "wallet.emptyHeading": { en: "No documents yet", hi: "अभी कोई दस्तावेज़ नहीं" },
+  "wallet.emptyDirection": {
+    en: "Add your Aadhaar, licence, RC or insurance so we can use them across every application.",
+    hi: "अपना आधार, लाइसेंस, आरसी या बीमा जोड़ें ताकि हर आवेदन में इस्तेमाल हो सके।",
+  },
+  "wallet.emptyCta": { en: "Add a document", hi: "दस्तावेज़ जोड़ें" },
+  "wallet.addCta": { en: "Add a document", hi: "दस्तावेज़ जोड़ें" },
+  "wallet.addHeading": { en: "What are you adding?", hi: "आप क्या जोड़ रहे हैं?" },
+  "wallet.addPlaceholder": { en: "Choose a document type", hi: "दस्तावेज़ का प्रकार चुनें" },
+  "wallet.allAdded": { en: "Every common document is already in your wallet.", hi: "सभी सामान्य दस्तावेज़ पहले से आपके वॉलेट में हैं।" },
+  "wallet.health.VERIFIED": { en: "Verified", hi: "सत्यापित" },
+  "wallet.health.NEEDS_FIX": { en: "Needs a fix", hi: "सुधार चाहिए" },
+  "wallet.health.EXPIRING": { en: "Expiring", hi: "जल्द खत्म होगा" },
+  "wallet.health.EXPIRED": { en: "Expired", hi: "समय समाप्त" },
+  "wallet.health.MISSING": { en: "Missing", hi: "उपलब्ध नहीं" },
+  "wallet.addedOn": { en: "Added {{date}}", hi: "{{date}} को जोड़ा गया" },
+  "wallet.expiresOn": { en: "Valid till {{date}}", hi: "{{date}} तक मान्य" },
+  "wallet.replaceCta": { en: "Replace document", hi: "दस्तावेज़ बदलें" },
+  "wallet.fieldsHeading": { en: "What we read", hi: "हमने क्या पढ़ा" },
+  "wallet.noIssues": { en: "No issues found.", hi: "कोई समस्या नहीं मिली।" },
+  "wallet.addToast": { en: "Added to your wallet", hi: "आपके वॉलेट में जोड़ दिया गया" },
+  "wallet.replaceToast": { en: "Replaced", hi: "बदल दिया गया" },
+
+  // Vehicles — "Your garage"
+  "vehicles.heading": { en: "Your vehicles", hi: "आपकी गाड़ियाँ" },
+  "vehicles.emptyHeading": { en: "No vehicles yet", hi: "अभी कोई गाड़ी नहीं" },
+  "vehicles.emptyDirection": {
+    en: "Bought or registered a vehicle? Tell Vahan Mitra and we'll track its documents and fines here.",
+    hi: "कोई गाड़ी खरीदी या रजिस्टर की? वाहन मित्र को बताएं, हम यहाँ इसके दस्तावेज़ और चालान ट्रैक करेंगे।",
+  },
+  "vehicles.emptyCta": { en: "Ask Vahan Mitra", hi: "वाहन मित्र से पूछें" },
+  "vehicles.registeredAt": { en: "Registered at {{rto}}", hi: "{{rto}} में पंजीकृत" },
+  "vehicles.ownershipPending": { en: "Still in {{name}}'s name", hi: "अभी भी {{name}} के नाम पर" },
+  "vehicles.hypothecated": { en: "Loan with {{bank}}", hi: "{{bank}} से लोन" },
+  "vehicles.fixCta": { en: "Fix this", hi: "ठीक करें" },
+  "vehicles.openFines": { en: "1 open fine", hi: "1 चालान बकाया" },
+  "vehicles.openFinesPlural": { en: "{{n}} open fines", hi: "{{n}} चालान बकाया" },
+  "vehicles.noFines": { en: "No open fines", hi: "कोई चालान बकाया नहीं" },
 } as const;
 
 export type TranslationKey = keyof typeof strings;

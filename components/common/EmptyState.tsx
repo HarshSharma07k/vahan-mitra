@@ -8,7 +8,10 @@ export interface EmptyStateProps {
   heading: string;
   direction: string;
   ctaLabel: string;
-  ctaHref: string;
+  /** Navigates. Provide this or onCtaClick, not both. */
+  ctaHref?: string;
+  /** Performs an in-place action (e.g. opens a dialog) instead of navigating. */
+  onCtaClick?: () => void;
   className?: string;
 }
 
@@ -18,6 +21,7 @@ export function EmptyState({
   direction,
   ctaLabel,
   ctaHref,
+  onCtaClick,
   className,
 }: EmptyStateProps) {
   return (
@@ -36,9 +40,20 @@ export function EmptyState({
         <p className="font-display text-[19px] font-bold text-ink">{heading}</p>
         <p className="text-[13px] text-muted">{direction}</p>
       </div>
-      <Button asChild size="sm" className="mt-1 rounded-xl bg-brand hover:bg-brand/90">
-        <Link href={ctaHref}>{ctaLabel}</Link>
-      </Button>
+      {ctaHref ? (
+        <Button asChild size="sm" className="mt-1 rounded-xl bg-brand hover:bg-brand/90">
+          <Link href={ctaHref}>{ctaLabel}</Link>
+        </Button>
+      ) : (
+        <Button
+          type="button"
+          size="sm"
+          onClick={onCtaClick}
+          className="mt-1 rounded-xl bg-brand hover:bg-brand/90"
+        >
+          {ctaLabel}
+        </Button>
+      )}
     </div>
   );
 }
