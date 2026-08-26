@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StatusBadge } from "@/components/track/StatusBadge";
 import { cn, formatDate } from "@/lib/utils";
 import { t } from "@/lib/i18n";
 import type { Application, ApplicationStage, Lang } from "@/lib/mockData";
@@ -25,7 +26,7 @@ export function ApplicationRow({ application, lang }: ApplicationRowProps) {
 
   return (
     <Link
-      href={`/track?app=${application.id}`}
+      href={`/track/${application.id}`}
       className="flex min-h-11 items-center gap-4 rounded-xl border border-line bg-surface px-4 py-3 transition-colors duration-150 hover:border-brand"
     >
       <div className="flex shrink-0 gap-1">
@@ -42,11 +43,14 @@ export function ApplicationRow({ application, lang }: ApplicationRowProps) {
           {lang === "hi" ? currentStage.labelHi : currentStage.label}
         </p>
       </div>
-      {application.expectedBy && (
-        <p className="shrink-0 text-[13px] text-muted">
-          {t("dashboard.expectedBy", lang, { date: formatDate(application.expectedBy) })}
-        </p>
-      )}
+      <div className="flex shrink-0 flex-col items-end gap-1">
+        <StatusBadge status={application.status} lang={lang} />
+        {application.expectedBy && (
+          <p className="text-[13px] text-muted">
+            {t("dashboard.expectedBy", lang, { date: formatDate(application.expectedBy) })}
+          </p>
+        )}
+      </div>
     </Link>
   );
 }

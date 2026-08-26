@@ -8,10 +8,10 @@ import { VehicleCard } from "@/components/dashboard/VehicleCard";
 import { ApplicationRow } from "@/components/dashboard/ApplicationRow";
 import { useAppStore } from "@/store/useAppStore";
 import { t } from "@/lib/i18n";
-import { getCitizen } from "@/lib/mockData";
+import { computeTriggers } from "@/lib/proactive";
+import { getCitizen, mockServices } from "@/lib/mockData";
 import { getDayPeriod } from "@/lib/utils";
 import {
-  buildActionItems,
   buildSummaryLine,
   isApplicationInProgress,
   isDocNeedingAttention,
@@ -45,7 +45,7 @@ export default function HomePage() {
     inProgressApplications.length,
     docsNeedingAttention.length
   );
-  const actionItems = buildActionItems(lang, wallet, vehicles, applications, challans);
+  const triggers = computeTriggers(citizenId as string);
 
   return (
     <div className="flex flex-col gap-8">
@@ -62,15 +62,16 @@ export default function HomePage() {
         <h2 className="font-display text-[19px] font-bold text-ink">
           {t("dashboard.actionHeading", lang)}
         </h2>
-        {actionItems.length > 0 ? (
+        {triggers.length > 0 ? (
           <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
-            {actionItems.map((item) => (
+            {triggers.map((trigger) => (
               <ActionCard
-                key={item.id}
-                reason={item.reason}
+                key={trigger.id}
+                reason={trigger.headline}
+                detail={trigger.costOfInaction}
                 noticedLabel={t("dashboard.noticedLabel", lang)}
-                ctaLabel={item.ctaLabel}
-                ctaHref={item.ctaHref}
+                ctaLabel={t("dashboard.actionStart", lang)}
+                ctaHref={`/apply/${mockServices[trigger.serviceId].id}`}
               />
             ))}
           </div>

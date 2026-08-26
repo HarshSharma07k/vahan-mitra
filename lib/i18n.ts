@@ -129,6 +129,179 @@ const strings = {
   },
   "dashboard.applicationsEmptyCta": { en: "Ask Vahan Mitra", hi: "वाहन मित्र से पूछें" },
   "dashboard.expectedBy": { en: "Expected by {{date}}", hi: "{{date}} तक अपेक्षित" },
+  "dashboard.actionStart": { en: "Start", hi: "शुरू करें" },
+
+  // Complexity meter — "Kitna Kam?"
+  "complexity.heroHeading": { en: "How much less work?", hi: "कितना कम काम?" },
+  "complexity.heroQuestionsLabel": { en: "questions asked", hi: "सवाल पूछे गए" },
+  "complexity.heroPortalsLabel": { en: "portals visited", hi: "पोर्टल खोलने पड़े" },
+  "complexity.heroMinutesLabel": { en: "minutes spent", hi: "मिनट लगे" },
+  "complexity.legacyPrefix": { en: "Parivahan", hi: "परिवहन" },
+  "complexity.oursPrefix": { en: "Vahan Mitra", hi: "वाहन मित्र" },
+  "complexity.questions": { en: "questions", hi: "सवाल" },
+  "complexity.portals": { en: "portals", hi: "पोर्टल" },
+  "complexity.screen": { en: "screen", hi: "स्क्रीन" },
+  "complexity.minutes": { en: "min", hi: "मिनट" },
+  "complexity.footer": {
+    en: "Same forms. Same fees. Same law. Zero regulations changed.",
+    hi: "वही फॉर्म। वही फीस। वही कानून। कोई नियम नहीं बदला।",
+  },
+  "complexity.receiptLine": {
+    en: "You answered {{ours}} questions. The current portal asks {{legacy}} for the same thing.",
+    hi: "आपने {{ours}} सवालों के जवाब दिए। मौजूदा पोर्टल इसी काम के लिए {{legacy}} सवाल पूछता है।",
+  },
+
+  // Proactive engine — "Aage Kya?"
+  "reminders.schedule": {
+    en: "We'll remind you on {{dates}} by {{channel}}.",
+    hi: "हम आपको {{dates}} को {{channel}} पर याद दिलाएँगे।",
+  },
+  "reminders.footer": {
+    en: "Reminders nearly double the chance a missing document actually arrives.",
+    hi: "याद दिलाने से किसी गुम दस्तावेज़ के पहुँचने की संभावना लगभग दोगुनी हो जाती है।",
+  },
+  "reminders.mute": { en: "Mute", hi: "म्यूट करें" },
+  "reminders.unmute": { en: "Unmute", hi: "अनम्यूट करें" },
+  "reminders.muted": { en: "Muted", hi: "म्यूट है" },
+  "reminders.channelWhatsapp": { en: "WhatsApp", hi: "व्हाट्सऐप" },
+  "reminders.channelSms": { en: "SMS", hi: "एसएमएस" },
+  "reminders.none": { en: "No reminders set for this application.", hi: "इस आवेदन के लिए कोई रिमाइंडर नहीं है।" },
+
+  // Partial submission — "Aadha Bhar Do"
+  "apply.canFileNowSingular": {
+    en: "You can file now. 1 document is still needed by {{date}}.",
+    hi: "आप अभी दर्ज कर सकते हैं। {{date}} तक 1 दस्तावेज़ और चाहिए।",
+  },
+  "apply.canFileNowPlural": {
+    en: "You can file now. {{n}} documents are still needed by {{date}}.",
+    hi: "आप अभी दर्ज कर सकते हैं। {{date}} तक {{n}} दस्तावेज़ और चाहिए।",
+  },
+  "apply.allDocsReady": { en: "Every document is in. Nothing owed.", hi: "सभी दस्तावेज़ आ गए हैं। कुछ बकाया नहीं है।" },
+  "apply.blockingMissing": {
+    en: "{{n}} document{{s}} still needed before you can file.",
+    hi: "दर्ज करने से पहले {{n}} दस्तावेज़ और चाहिए।",
+  },
+  "apply.submitCta": { en: "File now", hi: "अभी दर्ज करें" },
+  "apply.submitToast": { en: "Filed", hi: "दर्ज हो गया" },
+  "apply.back": { en: "Back", hi: "पीछे" },
+  "apply.next": { en: "Next", hi: "आगे" },
+  "apply.stepOf": { en: "Step {{n}} of {{total}}", hi: "चरण {{n}} / {{total}}" },
+  "apply.reviewHeading": { en: "Review before you file", hi: "दर्ज करने से पहले जाँच लें" },
+  "apply.docAlready": { en: "Already in your wallet", hi: "पहले से आपके वॉलेट में है" },
+  "apply.docReplace": { en: "Replace", hi: "बदलें" },
+  "apply.docBlockingNote": { en: "Needed to file at all.", hi: "दर्ज करने के लिए ज़रूरी है।" },
+  "apply.docOptionalNote": { en: "Needed before approval, not to file.", hi: "मंज़ूरी से पहले चाहिए, दर्ज करने के लिए नहीं।" },
+  "apply.useSample": { en: "Use sample document", hi: "नमूना दस्तावेज़ इस्तेमाल करें" },
+  "apply.uploadPrompt": { en: "Take a photo or choose a file", hi: "फोटो लें या फ़ाइल चुनें" },
+  "apply.scanning": { en: "Reading your document…", hi: "आपका दस्तावेज़ पढ़ा जा रहा है…" },
+  "apply.confirmDoc": { en: "Use this", hi: "इसे इस्तेमाल करें" },
+  "apply.taskHeading": { en: "Documents needed", hi: "ज़रूरी दस्तावेज़" },
+  "apply.feeLabel": { en: "Fee", hi: "शुल्क" },
+  "apply.etaLabel": { en: "Usually takes", hi: "आम तौर पर लगता है" },
+  "apply.etaDays": { en: "{{n}} days", hi: "{{n}} दिन" },
+  "apply.legalNameNote": { en: "Legally this is", hi: "कानूनी नाम है" },
+
+  // Pending docs card
+  "pending.heading": { en: "Still needed", hi: "अभी और चाहिए" },
+  "pending.dueBy": { en: "Due by {{date}}", hi: "{{date}} तक ज़रूरी" },
+  "pending.upload": { en: "Upload", hi: "अपलोड करें" },
+  "pending.complete": { en: "{{done}} of {{total}} documents in", hi: "{{total}} में से {{done}} दस्तावेज़ आ गए" },
+
+  // File trail — "Kisne Dekha?"
+  "trail.heading": { en: "Who has touched this file", hi: "इस फ़ाइल को किसने देखा" },
+  "trail.ageing": {
+    en: "Sitting at {{desk}} for {{days}} days. This office usually takes {{avg}}.",
+    hi: "{{desk}} पर {{days}} दिनों से है। यह दफ़्तर आम तौर पर {{avg}} लेता है।",
+  },
+  "trail.askWhy": { en: "Ask why it's delayed", hi: "देरी की वजह पूछें" },
+  "trail.queryFiled": { en: "Query filed", hi: "सवाल भेज दिया गया" },
+  "trail.queryPushedTitle": { en: "You asked why this is taking longer", hi: "आपने पूछा कि इसमें देर क्यों हो रही है" },
+  "trail.queryExpected": { en: "Expect a reply by {{date}}", hi: "{{date}} तक जवाब मिलने की उम्मीद" },
+  "trail.showAll": { en: "Show all", hi: "सभी दिखाएँ" },
+  "trail.showLess": { en: "Show less", hi: "कम दिखाएँ" },
+  "trail.empty": { en: "No desk has opened your file yet.", hi: "अभी तक किसी डेस्क ने आपकी फ़ाइल नहीं खोली।" },
+  "trail.action.RECEIVED": { en: "received your file", hi: "ने आपकी फ़ाइल प्राप्त की" },
+  "trail.action.OPENED": { en: "opened your file", hi: "ने आपकी फ़ाइल खोली" },
+  "trail.action.READ_RECORD": { en: "read your record", hi: "ने आपका रिकॉर्ड देखा" },
+  "trail.action.FORWARDED": { en: "forwarded your file", hi: "ने आपकी फ़ाइल आगे भेजी" },
+  "trail.action.QUERY_RAISED": { en: "raised a query", hi: "ने सवाल उठाया" },
+  "trail.action.APPROVED": { en: "approved your file", hi: "ने आपकी फ़ाइल मंज़ूर की" },
+
+  // Application status
+  "status.DRAFT": { en: "Draft", hi: "मसौदा" },
+  "status.SUBMITTED": { en: "Submitted", hi: "जमा किया गया" },
+  "status.SUBMITTED_PARTIAL": { en: "Filed — some pending", hi: "दर्ज — कुछ बाकी" },
+  "status.UNDER_REVIEW": { en: "Under review", hi: "समीक्षा में" },
+  "status.QUERY_RAISED": { en: "Query raised", hi: "सवाल उठाया गया" },
+  "status.APPROVED": { en: "Approved", hi: "मंज़ूर" },
+  "status.DISPATCHED": { en: "Dispatched", hi: "भेजा गया" },
+  "status.REJECTED": { en: "Rejected", hi: "अस्वीकृत" },
+
+  // Document kind labels
+  "doc.AADHAAR": { en: "Aadhaar card", hi: "आधार कार्ड" },
+  "doc.PAN": { en: "PAN card", hi: "पैन कार्ड" },
+  "doc.DL": { en: "Driving licence", hi: "ड्राइविंग लाइसेंस" },
+  "doc.RC": { en: "Registration certificate", hi: "पंजीकरण प्रमाणपत्र" },
+  "doc.INSURANCE": { en: "Insurance policy", hi: "बीमा पॉलिसी" },
+  "doc.PUC": { en: "Pollution certificate", hi: "प्रदूषण प्रमाणपत्र" },
+  "doc.ADDRESS_PROOF": { en: "Address proof", hi: "पते का प्रमाण" },
+  "doc.SALE_DEED": { en: "Sale deed", hi: "बिक्री विलेख" },
+  "doc.FORM_29": { en: "Form 29", hi: "फॉर्म 29" },
+  "doc.FORM_30": { en: "Form 30", hi: "फॉर्म 30" },
+  "doc.NOC": { en: "No objection certificate", hi: "अनापत्ति प्रमाणपत्र" },
+  "doc.PHOTO": { en: "Photograph", hi: "फोटो" },
+  "doc.SIGNATURE": { en: "Signature", hi: "हस्ताक्षर" },
+
+  // Plan page
+  "plan.heading": { en: "Here's what needs to happen", hi: "यह करना होगा" },
+  "plan.subheading": { en: "In the order it needs to happen.", hi: "जिस क्रम में यह होना है।" },
+  "plan.startCta": { en: "Start", hi: "शुरू करें" },
+  "plan.dependsOn": { en: "After: {{title}}", hi: "पहले यह: {{title}}" },
+  "plan.totalFee": { en: "Total fee", hi: "कुल शुल्क" },
+  "plan.totalDays": { en: "Usually takes", hi: "आम तौर पर लगता है" },
+  "plan.notFoundHeading": { en: "This plan isn't here anymore", hi: "यह योजना अब यहाँ नहीं है" },
+  "plan.notFoundDirection": {
+    en: "Tell us again what you need and we'll build a fresh one.",
+    hi: "फिर से बताएं कि आपको क्या चाहिए, हम नई योजना बनाएंगे।",
+  },
+  "apply.notFoundHeading": { en: "This task isn't here anymore", hi: "यह काम अब यहाँ नहीं है" },
+  "apply.notFoundDirection": {
+    en: "Tell us again what you need and we'll build a fresh plan.",
+    hi: "फिर से बताएं कि आपको क्या चाहिए, हम नई योजना बनाएंगे।",
+  },
+  "track.notFoundHeading": { en: "This application isn't here", hi: "यह आवेदन यहाँ नहीं है" },
+  "track.notFoundDirection": {
+    en: "It may have been reset. Here's everything you have in progress.",
+    hi: "हो सकता है यह रीसेट हो गया हो। यहाँ आपके सभी चालू आवेदन हैं।",
+  },
+
+  // Track list
+  "track.heading": { en: "Your applications", hi: "आपके आवेदन" },
+  "track.emptyHeading": { en: "Nothing to track yet", hi: "अभी ट्रैक करने के लिए कुछ नहीं" },
+  "track.emptyDirection": {
+    en: "Once you start something, it shows up here with every step in the open.",
+    hi: "जैसे ही आप कुछ शुरू करेंगे, वह हर कदम के साथ यहाँ दिखेगा।",
+  },
+  "track.emptyCta": { en: "Ask Vahan Mitra", hi: "वाहन मित्र से पूछें" },
+  "track.filterAll": { en: "All", hi: "सभी" },
+
+  // Landing precedents
+  "landing.comparisonHeading": { en: "How this compares", hi: "यह कैसे अलग है" },
+  "landing.precedent1Title": { en: "Michigan", hi: "मिशिगन" },
+  "landing.precedent1Body": {
+    en: "Cut its benefits application 80% — fewer questions, same eligibility rules, zero regulations changed.",
+    hi: "अपने लाभ आवेदन को 80% छोटा किया — कम सवाल, वही पात्रता नियम, कोई नियम नहीं बदला।",
+  },
+  "landing.precedent2Title": { en: "Singapore", hi: "सिंगापुर" },
+  "landing.precedent2Body": {
+    en: "Cut birth registration from 60 minutes to 15 by bundling every service around the life event, not the department.",
+    hi: "जन्म पंजीकरण को 60 मिनट से घटाकर 15 मिनट किया, हर सेवा को विभाग की जगह जीवन की घटना के इर्द-गिर्द जोड़कर।",
+  },
+  "landing.precedent3Title": { en: "Estonia", hi: "एस्टोनिया" },
+  "landing.precedent3Body": {
+    en: "Made asking a citizen for the same information twice illegal — once the state has it, no form may ask again.",
+    hi: "नागरिक से एक ही जानकारी दोबारा माँगना गैरकानूनी बना दिया — एक बार राज्य के पास जानकारी आने पर, कोई फॉर्म फिर नहीं माँग सकता।",
+  },
 } as const;
 
 export type TranslationKey = keyof typeof strings;
@@ -144,4 +317,19 @@ export function t(
     (acc, [k, v]) => acc.replaceAll(`{{${k}}}`, String(v)),
     raw as string
   );
+}
+
+export function docLabel(kind: string, lang: Lang): string {
+  const key = `doc.${kind}` as TranslationKey;
+  return key in strings ? t(key, lang) : kind;
+}
+
+export function statusLabel(status: string, lang: Lang): string {
+  const key = `status.${status}` as TranslationKey;
+  return key in strings ? t(key, lang) : status;
+}
+
+export function trailActionLabel(action: string, lang: Lang): string {
+  const key = `trail.action.${action}` as TranslationKey;
+  return key in strings ? t(key, lang) : action;
 }

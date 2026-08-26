@@ -42,6 +42,14 @@ export function relativeDays(iso: string): string {
   return `${-diff} day${diff === -1 ? "" : "s"} ago`
 }
 
+/** MOCK_TODAY plus a fixed number of days, as a YYYY-MM-DD string. Never real time. */
+export function addDaysToToday(days: number): string {
+  const dayMs = 24 * 60 * 60 * 1000
+  const [year, month, day] = MOCK_TODAY.slice(0, 10).split("-").map(Number)
+  const date = new Date(Date.UTC(year, month - 1, day) + days * dayMs)
+  return date.toISOString().slice(0, 10)
+}
+
 /** Traffic-light tone for a validity date: overdue, expiring inside two weeks, or fine. */
 export function expiryTone(iso: string): "ok" | "warn" | "danger" {
   const diff = daysUntil(iso)

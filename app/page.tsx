@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PersonaCard } from "@/components/landing/PersonaCard";
 import { MobileOtpDialog } from "@/components/landing/MobileOtpDialog";
+import { ComplexityMeter } from "@/components/common/ComplexityMeter";
 import { useAppStore } from "@/store/useAppStore";
 import { useHydrated } from "@/hooks/useHydrated";
 import { t, type TranslationKey } from "@/lib/i18n";
@@ -16,6 +17,12 @@ const STAT_ROWS: { number: string; labelKey: TranslationKey }[] = [
   { number: "104", labelKey: "landing.stat1Label" },
   { number: "4", labelKey: "landing.stat2Label" },
   { number: "₹2,000", labelKey: "landing.stat3Label" },
+];
+
+const PRECEDENTS: { titleKey: TranslationKey; bodyKey: TranslationKey }[] = [
+  { titleKey: "landing.precedent1Title", bodyKey: "landing.precedent1Body" },
+  { titleKey: "landing.precedent2Title", bodyKey: "landing.precedent2Body" },
+  { titleKey: "landing.precedent3Title", bodyKey: "landing.precedent3Body" },
 ];
 
 const OTP_DIALOG_CITIZEN_ID = "cit_ananya";
@@ -114,6 +121,32 @@ export default function LandingPage() {
               {t("landing.useMobileOtp", lang)}
             </Button>
           </div>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-8">
+        <div className="rounded-2xl border border-line bg-surface p-6 sm:p-8">
+          <h2 className="mb-6 font-display text-[19px] font-bold text-ink">
+            {t("complexity.heroHeading", lang)}
+          </h2>
+          <ComplexityMeter serviceId="RC_TRANSFER" variant="hero" lang={lang} />
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-8">
+        <h2 className="mb-6 font-display text-[19px] font-bold text-ink">
+          {t("landing.comparisonHeading", lang)}
+        </h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {PRECEDENTS.map((precedent) => (
+            <div
+              key={precedent.titleKey}
+              className="flex flex-col gap-2 rounded-2xl border border-line bg-surface p-5"
+            >
+              <p className="font-display text-[19px] font-bold text-ink">{t(precedent.titleKey, lang)}</p>
+              <p className="text-[15px] leading-[1.55] text-muted">{t(precedent.bodyKey, lang)}</p>
+            </div>
+          ))}
         </div>
       </div>
 

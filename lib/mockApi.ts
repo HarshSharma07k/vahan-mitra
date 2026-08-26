@@ -11,16 +11,21 @@ import {
   getWalletFor as findWalletFor,
   getChallansFor as findChallansFor,
   getApplicationsFor as findApplicationsFor,
+  getPendingVerificationsForCitizen as findPendingVerificationsForCitizen,
+  getRemindersForCitizen as findRemindersForCitizen,
   type Citizen,
   type Vehicle,
   type WalletDocument,
   type Challan,
   type Application,
+  type PendingVerification,
+  type Reminder,
 } from "@/lib/mockData";
 
 export const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 const READ_MS = 320;
+export const WRITE_MS = 700;
 
 export async function getCitizens(): Promise<Citizen[]> {
   await wait(READ_MS);
@@ -50,6 +55,16 @@ export async function getChallansFor(citizenId: string): Promise<Challan[]> {
 export async function getApplicationsFor(citizenId: string): Promise<Application[]> {
   await wait(READ_MS);
   return findApplicationsFor(citizenId);
+}
+
+export async function getPendingVerificationsForCitizen(citizenId: string): Promise<PendingVerification[]> {
+  await wait(READ_MS);
+  return findPendingVerificationsForCitizen(citizenId);
+}
+
+export async function getRemindersForCitizen(citizenId: string): Promise<Reminder[]> {
+  await wait(READ_MS);
+  return findRemindersForCitizen(citizenId);
 }
 
 export async function getApplication(applicationId: string): Promise<Application | undefined> {

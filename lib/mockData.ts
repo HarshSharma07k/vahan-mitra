@@ -802,7 +802,7 @@ export const mockApplications: Application[] = [
     citizenId: "cit_rakesh",
     serviceId: "DL_RENEWAL",
     title: "Renew driving licence",
-    status: "QUERY_RAISED",
+    status: "SUBMITTED_PARTIAL",
     submittedOn: "2026-08-11",
     expectedBy: "2026-08-26",
     feePaidInr: 416,
@@ -1047,6 +1047,19 @@ export const mockOcrFixtures: OcrFixture[] = [
       { key: "dob", label: "Date of birth", value: "14/02/1999", confidence: 0.95, box: { x: 10.8, y: 39.2, w: 4.9, h: 1.8 } },
       { key: "cov", label: "Vehicle classes", value: "MCWG, LMV", confidence: 0.91, box: { x: 10.9, y: 46.3, w: 4.4, h: 1.8 } },
       { key: "validTill", label: "Valid till", value: "13/02/2039", confidence: 0.96, box: { x: 11, y: 53.3, w: 4.9, h: 1.8 } },
+    ],
+    issues: [],
+  },
+  {
+    kind: "PHOTO",
+    variant: "clean",
+    previewUrl: "/mock/dl-clean.png",
+    fields: [
+      { key: "certNumber", label: "Certificate number", value: "MC-2026-RJ14-88231", confidence: 0.96, box: { x: 11, y: 20.4, w: 9.6, h: 2 } },
+      { key: "name", label: "Name", value: "RAKESH YADAV", confidence: 0.95, box: { x: 11, y: 27.6, w: 6.8, h: 1.9 } },
+      { key: "doctor", label: "Doctor's registration no.", value: "RMC-40217", confidence: 0.9, box: { x: 11, y: 34.8, w: 6.2, h: 1.9 } },
+      { key: "declaration", label: "Fitness declaration", value: "FIT TO DRIVE — FORM 1A", confidence: 0.93, box: { x: 11, y: 42, w: 11.4, h: 1.9 } },
+      { key: "issueDate", label: "Issued on", value: "20/08/2026", confidence: 0.97, box: { x: 11, y: 49.2, w: 4.9, h: 1.9 } },
     ],
     issues: [],
   },
@@ -1311,3 +1324,39 @@ export const getRemindersFor = (applicationId: string) =>
   mockReminders.filter((r) => r.applicationId === applicationId).sort((a, b) => a.sendOn.localeCompare(b.sendOn));
 export const getPendingVerificationsFor = (applicationId: string) =>
   mockPendingVerifications.filter((p) => p.applicationId === applicationId);
+export const getRemindersForCitizen = (citizenId: string) => {
+  const appIds = new Set(getApplicationsFor(citizenId).map((a) => a.id));
+  return mockReminders.filter((r) => appIds.has(r.applicationId));
+};
+export const getPendingVerificationsForCitizen = (citizenId: string) => {
+  const appIds = new Set(getApplicationsFor(citizenId).map((a) => a.id));
+  return mockPendingVerifications.filter((p) => appIds.has(p.applicationId));
+};
+export const getServiceTaskById = (taskId: string) =>
+  Object.values(mockServices).find((task) => task.id === taskId);
+
+/** Docs needed before approval but not to file at all — the rest are blocking. */
+const NON_BLOCKING_DOCS: Partial<Record<ServiceId, DocKind[]>> = {
+  RC_TRANSFER: ["INSURANCE", "PUC"],
+  DL_RENEWAL: ["PHOTO"],
+};
+
+/** How long a citizen owed on a non-blocking document before the application closes. */
+export const PARTIAL_FILE_GRACE_DAYS = 14;
+
+export function splitRequiredDocs(task: ServiceTask): { blocking: DocKind[]; nonBlocking: DocKind[] } {
+  const nonBlockingSet = new Set(NON_BLOCKING_DOCS[task.serviceId] ?? []);
+  return {
+    blocking: task.requiredDocs.filter((kind) => !nonBlockingSet.has(kind)),
+    nonBlocking: task.requiredDocs.filter((kind) => nonBlockingSet.has(kind)),
+  };
+}
+
+/** Citizen-facing label for a document owed after partial filing — more specific than the generic doc name where the law calls for a particular form. */
+const PENDING_DOC_LABEL_OVERRIDES: Partial<Record<string, { en: string; hi: string }>> = {
+  "DL_RENEWAL:PHOTO": { en: "Form 1A medical certificate", hi: "फॉर्म 1A मेडिकल प्रमाणपत्र" },
+};
+
+export function pendingDocLabelOverride(serviceId: ServiceId, kind: DocKind, lang: Lang): string | undefined {
+  return PENDING_DOC_LABEL_OVERRIDES[`${serviceId}:${kind}`]?.[lang];
+}
