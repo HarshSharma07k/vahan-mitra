@@ -49,3 +49,5 @@ DECISIONS.md
 # mock document generator — dev tooling, debug output only
 scripts/gen-docs/preview/
 scripts/gen-docs/boxes-report.json
+
+.vercel
